@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react'
+import Search from './pages/Search/Search';
+
 
 function App() {
     const [data, setData] = useState([{}])
+    const [word, setWord] = useState('');
 
     useEffect(() => {
         fetch("/hello").then(
@@ -11,7 +14,9 @@ function App() {
                 setData(data)
                 console.log(data)
             }
-        )
+        ).catch((error) => {
+            console.log(error);
+        })
     }, [])
 
     return (
@@ -21,6 +26,8 @@ function App() {
             ) : (
                 <p>{data.message}</p>
             )}
+
+            <Search word={word} setWord={setWord} />
         </div>
     )
 }
