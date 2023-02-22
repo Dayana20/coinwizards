@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react"
 import Search from "./pages/Search/Search"
 
-
+// function App(){
+// 	return(
+// 		<Routes>
+// 			<Route path="/" element={<Home/>}/>
+// 		</Routes>
+// 	)
+// }
 function App() {
 	const [data, setData] = useState([{}])
 	const [word, setWord] = useState("")

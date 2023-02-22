@@ -15,4 +15,5 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: npm install
+      - run: npm install react-bootstrap bootstrap
       - run: npx eslint .
