@@ -5,7 +5,7 @@ import App from "./App"
 import UserList from "./userList"
 import NavBar from "./NavBar"
 import reportWebVitals from "./reportWebVitals"
-import {BrowserRouter, Route, Routes} from 'react-router-dom'
+import {BrowserRouter, Route, Routes} from "react-router-dom"
 
 
 ReactDOM.render(
@@ -15,8 +15,8 @@ ReactDOM.render(
     <Route path="/Profile" element={<UserList/>}/>
   </Routes>
   </BrowserRouter>,
-  document.getElementById('root')
-);
+  document.getElementById("root")
+)
 
 
 // const root = ReactDOM.createRoot(document.getElementById("root"))

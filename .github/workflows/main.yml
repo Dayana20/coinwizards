@@ -18,5 +18,4 @@ jobs:
       - run: npm install react-bootstrap bootstrap
       - run: npm install -save react-router-dom
       - run: npm install react-bootstrap bootstrap
-      - run: npm init @eslint/config
       - run: npx eslint .

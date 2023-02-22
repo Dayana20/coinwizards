@@ -4,7 +4,6 @@ REQ_DIR = .
 FORCE:
 
 all_tests: FORCE
-	npm init @eslint/config
 	npx eslint .
 
 dev_env: FORCE
