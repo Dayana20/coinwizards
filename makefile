@@ -8,8 +8,11 @@ all_tests: FORCE
 
 dev_env: FORCE
 	cd $(REACT_APP)
-	npm install – -save react-router-dom
+	npm install react-scripts
+	npm install -save react-router-dom
 	npm install react-bootstrap bootstrap
 
 run: FORCE
-	cd $(REACT_APP); npm start
+	cd $(REACT_APP); 
+	npm install react-scripts
+	npm start
