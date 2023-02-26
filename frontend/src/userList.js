@@ -55,7 +55,6 @@ function UserList() {
 	return (
 		<div>
 			<h3>User List:</h3>
-			{/* {Object.values(data)} */}
 			{userListNames.map(names=> <div><a href="/Profile">{names}</a></div>)}
 			<a href="/">HERE</a>
 		</div>
