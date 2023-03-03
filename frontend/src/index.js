@@ -4,6 +4,7 @@ import Home from "./Home"
 import App from "./App"
 import NavBar from "./NavBar"
 import UserList from "./userList"
+import ProfileP from "./profile"
 import reportWebVitals from "./reportWebVitals"
 import {BrowserRouter, Route, Routes} from "react-router-dom"
 
@@ -12,24 +13,13 @@ ReactDOM.render(
   <BrowserRouter>
   <Routes>
     <Route path="/" element={<Home/>}/>
-    <Route path="/Profile" element={<UserList/>}/>
+    <Route path="/Home" element={<Home/>}/>
+    <Route path="/Profile/" element={<ProfileP/>}/>
+    <Route path="/Profile/:id" element={<ProfileP/>}/>
   </Routes>
   </BrowserRouter>,
   document.getElementById("root")
 )
-
-
-// const root = ReactDOM.createRoot(document.getElementById("root"))
-// root.render(
-// 	<React.StrictMode>
-//     HIHIHI
-// 		<NavBar />
-// 		<App />
-// 		<h4>User List:</h4>
-
-// 		<UserList />
-// 	</React.StrictMode>
-// )
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
