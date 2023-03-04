@@ -12,7 +12,6 @@ import UserList from "./userList"
 // Latests Trends
 
 function Home() {
-    console.log("here!! home")
     return (
       <div>
         <NavBar/>
