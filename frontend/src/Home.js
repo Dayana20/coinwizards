@@ -1,6 +1,8 @@
-import React from "react"
+import React, { useState } from "react"
 import NavBar from "./NavBar"
 import UserList from "./userList"
+import Search from "./pages/Search/Search"
+import "./css/home.css"
 
 // Home Page - Logged In
 
@@ -12,11 +14,24 @@ import UserList from "./userList"
 // Latests Trends
 
 function Home() {
+    const [word, setWord] = useState("")
     return (
-      <div>
+      <div id="homestyle">
         <NavBar/>
-        <h1>Welcome!</h1>
-        <UserList/>
+        <h1 id="intro">Welcome!</h1>
+        <Search word={word} setWord={setWord} />
+
+        <div id="itemList">
+          <div id="uList">
+            <h3>Users</h3>
+            <UserList/>
+          </div>
+
+          <div id="cList">
+            <h3>Coins</h3>
+          </div>
+
+        </div>
       </div>
     )
   }

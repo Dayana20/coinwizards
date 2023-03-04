@@ -25,7 +25,6 @@ function NavBar() {
 							<Nav.Link href="/Profile">Profile</Nav.Link>
 							{/* <Nav.Link classname="justify-content-end"  href="#action2">Resources</Nav.Link> */}
 							<NavDropdown title="Settings" id="settingsDropdown">
-								<NavDropdown.Item href="#action3">Profile</NavDropdown.Item>
 								<NavDropdown.Item href="#action4">Privacy</NavDropdown.Item>
 								<NavDropdown.Divider />
 								{/* can use route to redirect to new pages instead of using html page */}
