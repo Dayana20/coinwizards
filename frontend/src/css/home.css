@@ -1,0 +1,49 @@
+body{
+    background-color: rgb(206, 244, 206);
+}
+
+#homestyle{
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#intro{
+    margin-top: 5vh;
+    text-align: center;
+    font-weight: bold;
+}
+
+#itemList{
+    display: flex;
+    flex-direction: row;
+    margin-top: 5vh;
+    margin-left: 2vw;
+    justify-content: space-evenly;
+    text-align: center;
+}
+
+#uList{
+    padding: 5vh;
+    background-color: rgb(61, 170, 207);
+    border-radius: 3vh;
+    
+}
+
+#cList{
+    padding: 5vh;
+    background-color: rgb(61, 170, 207);
+    border-radius: 3vh;
+
+}
+
+#userListItem{
+    /* text-align: center; */
+    text-decoration: none;
+    color:black;
+}
+
+#userListItem:hover{
+    /* text-align: center; */
+    text-decoration: none;
+    color:rgb(253, 214, 19);
+    font-weight: bolder;
+}
