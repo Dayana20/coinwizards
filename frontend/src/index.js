@@ -7,6 +7,7 @@ import UserList from "./userList"
 import ProfileP from "./profile"
 import reportWebVitals from "./reportWebVitals"
 import {BrowserRouter, Route, Routes} from "react-router-dom"
+import login from "./login" 
 
 
 ReactDOM.render(
@@ -15,6 +16,7 @@ ReactDOM.render(
     <Route path="/" element={<Home/>}/>
     <Route path="/Home" element={<Home/>}/>
     <Route path="/Profile/" element={<ProfileP/>}/>
+    <Route path="/login/" element={<login/>}/>
     <Route path="/Profile/:id" element={<ProfileP/>}/>
   </Routes>
   </BrowserRouter>,
