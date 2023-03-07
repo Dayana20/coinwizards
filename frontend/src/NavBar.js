@@ -10,7 +10,7 @@ import "bootstrap/dist/css/bootstrap.css"
 // used https://react-bootstrap.github.io/components/navbar/ as foundation
 function NavBar() {
 	return (
-		<div>
+		<div id="homestyle">
 			<Navbar bg="light" expand="lg">
 				<Container fluid>
 					<Navbar.Brand href="/">CoinWizards</Navbar.Brand>
