@@ -1,9 +1,11 @@
 import React from "react"
 import {Container, Row, Col, Form, Button} from "react-bootstrap"
+import "../../css/home.css"
 
 
 const Search = () => {
 	return (
+		<div id="searchBar">
 		<Container className='mt-5'>
 			<Row className='justify-content-center'>
 				<Col xs={12} md={8}>
@@ -22,7 +24,7 @@ const Search = () => {
 					</Form>
 				</Col>
 			</Row>
-		</Container>
+		</Container></div>
 
 	)
 }

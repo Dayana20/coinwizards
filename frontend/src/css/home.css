@@ -4,12 +4,13 @@ body{
 
 #homestyle{
     font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    flex-direction: column;
 }
 
 #intro{
     margin-top: 5vh;
     text-align: center;
-    font-weight: bold;
 }
 
 #itemList{
@@ -23,27 +24,42 @@ body{
 
 #uList{
     padding: 5vh;
-    background-color: rgb(61, 170, 207);
+    border-width: 100px;
+    background-color: rgb(183, 234, 251);
     border-radius: 3vh;
+    /* border: 5px solid rgb(183, 234, 251); */
     
 }
 
 #cList{
     padding: 5vh;
-    background-color: rgb(61, 170, 207);
+    background-color: rgb(183, 234, 251);
     border-radius: 3vh;
 
 }
 
 #userListItem{
-    /* text-align: center; */
     text-decoration: none;
     color:black;
 }
 
 #userListItem:hover{
-    /* text-align: center; */
     text-decoration: none;
     color:rgb(253, 214, 19);
     font-weight: bolder;
+}
+
+#coinListItem{
+    text-decoration: none;
+    color:black;
+}
+
+#coinListItem:hover{
+    text-decoration: none;
+    color:rgb(115, 200, 109);
+    font-weight: bolder;
+}
+
+#searchBar{  
+    margin-left: 8vw;
 }

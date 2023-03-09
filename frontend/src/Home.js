@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import NavBar from "./NavBar"
 import UserList from "./userList"
 import Search from "./pages/Search/Search"
+import CoinList from "./coinList"
 import "./css/home.css"
 
 // Home Page - Logged In
@@ -19,7 +20,9 @@ function Home() {
       <div id="homestyle">
         <NavBar/>
         <h1 id="intro">Welcome!</h1>
-        <Search word={word} setWord={setWord} />
+        <div>
+          <Search word={word} setWord={setWord} />
+        </div>
 
         <div id="itemList">
           <div id="uList">
@@ -29,6 +32,7 @@ function Home() {
 
           <div id="cList">
             <h3>Coins</h3>
+            <CoinList/>
           </div>
 
         </div>
