@@ -63,3 +63,15 @@ body{
 #searchBar{  
     margin-left: 8vw;
 }
+
+#coinP{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#cItem{
+    text-align: center;
+}

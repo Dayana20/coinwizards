@@ -20,7 +20,7 @@ function CoinList() {
 	if (typeof data["coins_list"]=="undefined"){
 		return (<div>NO USERS!</div>)
 	} else{
-		return (<div>{data["coins_list"].map(elem =><div><a id="coinListItem" href={"/Profile/"+String(elem.name)}>{elem.name}</a></div>)}</div>)
+		return (<div>{data["coins_list"].map(elem =><div><a id="coinListItem" href={"/Coin/"+String(elem.name)}>{elem.name}</a></div>)}</div>)
 	}
 
 }
