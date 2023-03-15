@@ -8,7 +8,6 @@ import ProfileP from "./profile"
 import CoinP from "./coin"
 import reportWebVitals from "./reportWebVitals"
 import {BrowserRouter, Route, Routes} from "react-router-dom"
-import login from "./login" 
 
 
 ReactDOM.render(

@@ -4,6 +4,8 @@ import UserList from "./userList"
 import Search from "./pages/Search/Search"
 import CoinList from "./coinList"
 import "./css/home.css"
+import Login from "./login" 
+
 
 // Home Page - Logged In
 
@@ -34,7 +36,7 @@ function Home() {
             <h3>Coins</h3>
             <CoinList/>
           </div>
-
+          <Login/>
         </div>
       </div>
     )

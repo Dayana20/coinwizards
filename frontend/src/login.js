@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react"
 // import React from "react"
 // import { BrowserRouter, Route, Routes } from "react-router"
 // import "./App.css"
@@ -32,3 +33,31 @@
 // }
 
 // export default login
+
+// temporary way to get logged in and out
+// let userLoggedIn=true
+
+function Login(){
+    const [data, setData] = useState([{}])
+
+    useEffect(() => {
+		fetch("/users/login/user1/string").then(
+			res => res.json()
+		).then(
+			data => {
+				setData(data)
+			}            
+		). catch((error) => {
+			console.error("Error: ", error)
+		})
+	}, [])
+    console.log("type", data["Data"])
+    if(data["Data"]=="Cannot login: Wrong Password"){
+        return(false)
+    } else{
+        return(true)
+    }
+    
+}
+
+export default Login
