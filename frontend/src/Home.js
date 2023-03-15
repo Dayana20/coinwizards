@@ -36,7 +36,6 @@ function Home() {
             <h3>Coins</h3>
             <CoinList/>
           </div>
-          <Login/>
         </div>
       </div>
     )

@@ -18,10 +18,19 @@ function CoinP(){
 		})
 	}, [])
  
-    // for(const [key,value] of Object.entries(coinData["urls"])){
-    //    urls.push([key,value])
-    // }
-    console.log("status", Login())
+    let CoinFollow =(user,coin) =>{
+        fetch("/users/coins/follow/"+user+"/"+coin).then(
+            res => res.json()
+        ).then(
+            data => {
+                data
+            }            
+        ). catch((error) => {
+            console.error("Error: ", error)
+        })
+    }
+    const statusLoggedIn = Login()
+
     return(
         <>
             <NavBar/>
@@ -46,10 +55,10 @@ function CoinP(){
                     <h3 id="cItem">Tags: {coinData["tags"]}</h3>
                     <h3 id="cItem">Date Added: {coinData["dateAdded"]}</h3>
                 </div>
-                {(Login() === false) ? (
+                {(statusLoggedIn == false) ? (
                     <p></p>
                 ) : (
-                    <button> Follow </button>
+                    <button onClick={()=>CoinFollow(statusLoggedIn,coinData["name"])}> Follow </button>
                 )}
             </div>
         </>

@@ -55,7 +55,7 @@ function Login(){
     if(data["Data"]=="Cannot login: Wrong Password"){
         return(false)
     } else{
-        return(true)
+        return(("user1"))
     }
     
 }
