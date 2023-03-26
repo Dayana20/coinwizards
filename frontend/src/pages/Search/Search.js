@@ -9,7 +9,7 @@ const Search = () => {
 		<Container className='mt-5'>
 			<Row className='justify-content-center'>
 				<Col xs={12} md={8}>
-					<Form>
+					<Form action="/Search/">
 						<Row>
 							<Col xs={9}>
 								<Form.Control
@@ -18,7 +18,7 @@ const Search = () => {
 								/>
 							</Col>
 							<Col>
-								<Button type="submit" variant="dark">Search</Button>{" "}
+								<Button type="submit" variant="dark"><a href="/Search/" style={{textDecoration: "none"}}>Search</a></Button>{" "}
 							</Col>
 						</Row>
 					</Form>

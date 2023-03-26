@@ -8,6 +8,7 @@ import ProfileP from "./profile"
 import CoinP from "./coin"
 import reportWebVitals from "./reportWebVitals"
 import {BrowserRouter, Route, Routes} from "react-router-dom"
+import SearchPage from "./searchPage"
 
 
 ReactDOM.render(
@@ -20,6 +21,7 @@ ReactDOM.render(
     <Route path="/Profile/:id" element={<ProfileP/>}/>
     <Route path="/Coin/" element={<CoinP/>}/>
     <Route path="/Coin/:id" element={<CoinP/>}/>
+    <Route path="/Search/" element={<SearchPage/>}/>
 
   </Routes>
   </BrowserRouter>,
