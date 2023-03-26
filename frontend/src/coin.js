@@ -6,6 +6,8 @@ import Login from "./login"
 function CoinP(){
     const {id="CoinNameHere"} = useParams()
     const [coinData, setCoinData] = useState([{}])
+    const [followingData, setFollowData] = useState([{}])
+
     useEffect(() => {
 		fetch(`/coins/details/${id}`).then(
 			res => res.json()
@@ -28,15 +30,29 @@ function CoinP(){
         ). catch((error) => {
             console.error("Error: ", error)
         })
+        alert("You are now following "+String(coin))
+        window.location.reload()
+    }
+    
+    let followingCoin =(user,coin) =>{
+        fetch("/users/coins/exist/"+user+"/"+coin).then(
+            res => res.json()
+        ).then(
+            data => {
+                setFollowData(data)
+            }            
+        ). catch((error) => {
+            console.error("Error: ", error)
+        })
     }
     const statusLoggedIn = Login()
+    followingCoin(statusLoggedIn,coinData["name"])
 
     return(
         <>
             <NavBar/>
             <div id = "coinP">
                 
-                <h2>Welcome back, {id}!</h2>
                 <div>
                     <img className="bg-dark rounded-circle img-thumbnail" style={{width: "10rem", height: "10rem"}} src={coinData["logo"]}/>
                 </div>
@@ -55,7 +71,7 @@ function CoinP(){
                     <h3 id="cItem">Tags: {coinData["tags"]}</h3>
                     <h3 id="cItem">Date Added: {coinData["dateAdded"]}</h3>
                 </div>
-                {(statusLoggedIn == false) ? (
+                {(statusLoggedIn == false || followingData == true) ? (
                     <p></p>
                 ) : (
                     <button onClick={()=>CoinFollow(statusLoggedIn,coinData["name"])}> Follow </button>
