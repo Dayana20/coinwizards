@@ -1,3 +1,20 @@
 /* #profilestyle{
     font-family: 'Courier New', Courier, monospace;
 } */
+#pictureWrapper {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: "10px";
+    position: relative;
+    max-width: "5rem";
+}
+
+#picture{
+    display: flex;
+    max-width: "1px";
+    max-height: "1px";
+    width: "1";
+    height: "1";
+}

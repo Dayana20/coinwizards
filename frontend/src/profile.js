@@ -2,6 +2,7 @@ import NavBar from "./NavBar"
 import React, { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import "./css/profile.css"
+import blank_profile from "./assets/blank_profile.jpg"
 
 
 function ProfileP(){
@@ -30,6 +31,17 @@ function ProfileP(){
     
 
     return(
+        // <>
+        //     <NavBar/>
+        //     <div className="container-fluid">
+        //         <div className="row">
+        //             <div id="pictureWrapper">
+        //                 <img id="picture" className="rounded-circle" src={blank_profile}/>
+        //             </div>
+        //         </div>
+        //     </div>
+        // </>
+
         <>
             <div id = "profilestyle">
                 <NavBar/>
