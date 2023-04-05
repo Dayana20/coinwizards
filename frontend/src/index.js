@@ -6,6 +6,8 @@ import NavBar from "./NavBar"
 import UserList from "./userList"
 import ProfileP from "./profile"
 import CoinP from "./coin"
+import FollowersP from "./followers"
+import FollowingP from "./following"
 import reportWebVitals from "./reportWebVitals"
 import {BrowserRouter, Route, Routes} from "react-router-dom"
 import SearchPage from "./searchPage"
@@ -19,10 +21,11 @@ ReactDOM.render(
     <Route path="/Profile/" element={<ProfileP/>}/>
     <Route path="/login/" element={<login/>}/>
     <Route path="/Profile/:id" element={<ProfileP/>}/>
+    <Route path="/Profile/:id/followers" element={<FollowersP/>}/>
+    <Route path="/Profile/:id/following" element={<FollowingP/>}/>
     <Route path="/Coin/" element={<CoinP/>}/>
     <Route path="/Coin/:id" element={<CoinP/>}/>
     <Route path="/Search/" element={<SearchPage/>}/>
-
   </Routes>
   </BrowserRouter>,
   document.getElementById("root")

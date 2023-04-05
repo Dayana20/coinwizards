@@ -1,20 +1,150 @@
-/* #profilestyle{
-    font-family: 'Courier New', Courier, monospace;
-} */
-#pictureWrapper {
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    margin-top: "10px";
-    position: relative;
-    max-width: "5rem";
+.container-fluid {
+    padding: 0;
 }
 
-#picture{
+.followerPopup {
+    background-color: red;
+    position: fixed;
     display: flex;
-    max-width: "1px";
-    max-height: "1px";
-    width: "1";
-    height: "1";
+    justify-content: center;
+    z-index: 5;
+}
+
+#noneHeader {
+    text-align: center;
+    color:aliceblue;
+    font-size: 1.5em;
+}
+
+#profilePage {
+    font-family: 'Courier New', Courier, monospace;
+    box-sizing: border-box;
+    display: block;
+    height: 100%;
+}
+
+#errorProfile {
+    text-align: center;
+    font-size: 2rem;
+    min-height:100vh;
+}
+
+#pictureCol {
+    background-color: rgb(28, 28, 32);
+    text-align:center;
+    float: left;
+    min-height:100%;
+    bottom: 0;
+    z-index: -1;
+    min-width: 20rem;
+    position: absolute;
+}
+
+#pictureCircle{
+    width: 15rem;
+    height: 15rem;
+    box-shadow: 0px 0px 10px rgba(25, 25, 25, 0.8);
+    margin-top: 8rem;
+}
+
+#nameHeader {
+    align-self:left;
+    max-width: 20rem;
+    margin-top: 1rem;
+    width: 20rem;
+    margin-left: 0rem;
+    text-align: center;
+    font-size: 2rem;
+    color:aliceblue;
+}
+
+#followHeader {
+    align-self:left;
+    max-width: 20rem;
+    margin-top: 1rem;
+    width: 20rem;
+    margin-left: 0rem;
+    text-align: center;
+    font-size: 1rem;
+    color:aliceblue;
+}
+
+#coinsDiv {
+    background-color: rgb(24, 48, 82);
+    width: 20rem;
+    height: 24rem;
+    position:absolute;
+    left: 20rem;
+}
+
+#coinHeader {
+    background-color: rgb(28, 45, 68);
+    text-align: center;
+    font-size: 1.6rem;
+    color:aliceblue;
+}
+
+#coinGroup {
+    max-height: 20rem;
+    overflow-y:auto;
+    position: relative;
+    background-color: rgb(37, 53, 90);
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+#coinGroup:hover {
+    overflow-y:auto;
+    background-color: rgb(37, 53, 90);
+    -ms-overflow-style: auto;
+    scrollbar-width: auto;
+}
+
+#coinItem {
+    text-align: left;
+    color:aliceblue;
+    background-color: rgb(37, 53, 90);
+}
+
+#coinItem:hover{
+    text-decoration: none;
+    color:rgb(90, 119, 193);
+    font-weight: bolder;
+}
+
+#placeholderCol2 {
+    background-color: rgb(225, 255, 0); 
+    width: 30rem;
+    height: 378px;
+    left: 40rem;
+    position:absolute;
+}
+
+#postsCol {
+    background-color: rgb(255, 0, 0);
+    min-height:93%;
+    bottom: 0;
+    min-width: 20rem;
+    position: absolute;
+    z-index: -1;
+    right: 0%;
+}
+
+#placeholderCol {
+    background-color: rgb(0, 0, 255); 
+    position: absolute;
+    left: 20rem;
+    bottom: 0;
+    height: 356px;
+    width: 50rem;
+}
+
+#followRef {
+    text-decoration: none;
+    color:aliceblue;
+}
+
+#followRef:hover {
+    color:rgb(90, 119, 193);
+    font-weight: bolder;
 }
