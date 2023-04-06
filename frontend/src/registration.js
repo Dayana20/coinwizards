@@ -1,22 +1,22 @@
-import React, { useState } from "react";
+import React, { useState } from "react"
 
 const RegistrationPage = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
-  });
+  })
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
-  };
+    const { name, value } = event.target
+    setFormData({ ...formData, [name]: value })
+  }
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log("Submitted form data:", formData);
+    event.preventDefault()
+    console.log("Submitted form data:", formData)
     // You can send formData to your backend for processing here
-  };
+  }
 
   return (
     <div className="registration">
@@ -55,7 +55,7 @@ const RegistrationPage = () => {
         <button type="submit">Register</button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default Registration;
+export default RegistrationPage
