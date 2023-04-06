@@ -39,19 +39,20 @@ import React, { useState, useEffect } from "react"
 
 function Login(){
     const [data, setData] = useState([{}])
-
+	// PASSWORD IS ENCRYPT SO NEED TO DECRYPT FIRST TO COMPAREÍ
     useEffect(() => {
 		fetch("/users/login/user1/string").then(
 			res => res.json()
 		).then(
 			data => {
 				setData(data)
+				// console.log("lgoin",data)
 			}            
 		). catch((error) => {
 			console.error("Error: ", error)
 		})
 	}, [])
-    console.log("type", data["Data"])
+    // console.log("type", data["Data"])
     if(data["Data"]=="Cannot login: Wrong Password"){
         return(false)
     } else{

@@ -1,13 +1,14 @@
 import NavBar from "./NavBar"
 import React, { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
-import Login from "./login" 
+// import Login from "./login" 
 
 function CoinP(){
     const {id="CoinNameHere"} = useParams()
     const [coinData, setCoinData] = useState([{}])
     const [followingData, setFollowData] = useState([{}])
-
+    // login not working for now
+    // temp solution - user specific user geoge
     useEffect(() => {
 		fetch(`/coins/details/${id}`).then(
 			res => res.json()
@@ -18,6 +19,7 @@ function CoinP(){
 		). catch((error) => {
 			console.error("Error: ", error)
 		})
+        // followingCoin(statusLoggedIn,coinData["name"])
 	}, [])
  
     let CoinFollow =(user,coin) =>{
@@ -33,6 +35,20 @@ function CoinP(){
         alert("You are now following "+String(coin))
         window.location.reload()
     }
+
+    let unfollowCoin =(user,coin) =>{
+        fetch("/users/coins/remove/follow/"+user+"/"+coin).then(
+            res => res.json()
+        ).then(
+            data => {
+                data
+            }            
+        ). catch((error) => {
+            console.error("Error: ", error)
+        })
+        alert("You are now unfollowing "+String(coin))
+        window.location.reload()
+    }
     
     let followingCoin =(user,coin) =>{
         fetch("/users/coins/exist/"+user+"/"+coin).then(
@@ -45,8 +61,10 @@ function CoinP(){
             console.error("Error: ", error)
         })
     }
-    const statusLoggedIn = Login()
-    followingCoin(statusLoggedIn,coinData["name"])
+    const statusLoggedIn = "george"
+    const exist = followingCoin(statusLoggedIn,coinData["name"])
+    console.log(3,statusLoggedIn, followingData)
+    // followingCoin(statusLoggedIn,coinData["name"])
 
     return(
         <>
@@ -72,7 +90,7 @@ function CoinP(){
                     <h3 id="cItem">Date Added: {coinData["dateAdded"]}</h3>
                 </div>
                 {(statusLoggedIn == false || followingData == true) ? (
-                    <p></p>
+                    <button onClick={()=>unfollowCoin(statusLoggedIn,coinData["name"])}> Unfollow </button>
                 ) : (
                     <button onClick={()=>CoinFollow(statusLoggedIn,coinData["name"])}> Follow </button>
                 )}
