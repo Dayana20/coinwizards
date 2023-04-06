@@ -13,7 +13,7 @@ function SearchPage() {
     const [word, setWord] = useState("")
     const [menuData, setMenuData] = useState([{}])
 
-    console.log("word:",word)
+    // console.log("word:",word)
 
     useEffect(() => {
       fetch("/options").then(
@@ -26,18 +26,14 @@ function SearchPage() {
         console.error("Error: ", error)
       })
     }, [])
+
     let options = [{value:"All", label:"All"}]
-    if(typeof menuData == "undefined"){    
-      for(let i=0; i< menuData["Choices"].length;i++){
-        options.push({values: menuData["Choices"][i]["value"], label: menuData["Choices"][i]["label"]})
-      }
-    }
     return (
       <>
         <NavBar/>
         <div id="searchbar" style={{marginTop:"5vh",marginBottom:"5vh"}}>
             <Form className="d-flex justify-content-center">
-              <Select options={options}/>
+              <Select options={menuData["Choices"]}/>
               <Form.Control
                 type="search"
                 placeholder="Search"
