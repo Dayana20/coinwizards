@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react"
-import Button from "react-bootstrap/Button"
 import Container from "react-bootstrap/Container"
-import Form from "react-bootstrap/Form"
 import Nav from "react-bootstrap/Nav"
 import Navbar from "react-bootstrap/Navbar"
 import NavDropdown from "react-bootstrap/NavDropdown"
@@ -10,7 +8,6 @@ import Login from "./login"
 
 // used https://react-bootstrap.github.io/components/navbar/ as foundation
 function NavBar() {
-	console.log(Login())
 	if (Login()==false){
 		return (
 			<div id="homestyle">
@@ -55,13 +52,10 @@ function NavBar() {
 								navbarScroll
 							>
 								<Nav.Link href="/">Home</Nav.Link>
-								{/* "/Profile/"+String(elem.name)} */}
 								<Nav.Link href={"/Profile/"+String("user1")}>Profile</Nav.Link>
-								{/* <Nav.Link classname="justify-content-end"  href="#action2">Resources</Nav.Link> */}
 								<NavDropdown title="Settings" id="settingsDropdown">
 									<NavDropdown.Item href="#action4">Privacy</NavDropdown.Item>
 									<NavDropdown.Divider />
-									{/* can use route to redirect to new pages instead of using html page */}
 									<NavDropdown.Item href="#action5">Log Out</NavDropdown.Item>
 								</NavDropdown>
 							</Nav>
