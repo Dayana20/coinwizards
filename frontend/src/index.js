@@ -11,6 +11,7 @@ import FollowingP from "./following"
 import reportWebVitals from "./reportWebVitals"
 import {BrowserRouter, Route, Routes} from "react-router-dom"
 import SearchPage from "./searchPage"
+import RegistrationPage from "./registration"
 
 
 ReactDOM.render(
