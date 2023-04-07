@@ -68,12 +68,19 @@ function SearchPage() {
 
         <div>
           <h3>Users</h3>
-          <div style={{border: "5px solid white", height:"20vh"}}>
+          <div className="d-flex align-items-center" style={{border: "5px solid white", height:"20vh"}}>
             {(typeof userData[0]=="object") ? (
-                <p>NO RESULTS</p>
+                 <div className="d-flex align-items-center" style={{border: "5px solid white", height:"15vw", marginLeft:"3vh"}}>
+                  NO RESULT
+                </div>
                 
             ) : (
-              userData["Name"]["name"]
+            
+              <div className="d-flex align-items-center" style={{border: "5px solid white", height:"15vw", marginLeft:"3vh"}}>
+                <a href={"/Profile/"+String(userData["Name"]["name"])}>
+                {userData["Name"]["name"]}
+                  </a>
+              </div>
             )}
           </div>
 
