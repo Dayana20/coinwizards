@@ -11,22 +11,43 @@ import Select from "react-select"
 
 function SearchPage() {
     const [word, setWord] = useState("")
+    const [data, setData] = useState([{}])
+    const [userData, setUserData] = useState([{}])
+
+
+    let inputText = (e) => {
+      setWord(e.target.value.toLowerCase())
+    }
+
     const [menuData, setMenuData] = useState([{}])
-
-    // console.log("word:",word)
-
     useEffect(() => {
       fetch("/options").then(
         res => res.json()
       ).then(
           data => {
-            setMenuData(data)
+            setData(data)
         }            
       ). catch((error) => {
         console.error("Error: ", error)
       })
     }, [])
 
+    let findUsers = (name) => {
+      if(name!=""){
+        fetch("/users/details/"+name).then(
+          res => res.json()
+        ).then(
+          data => {
+            setUserData(data["Data"][name])
+            
+          }            
+        ). catch((error) => {
+          console.error("Error: ", error)
+          setUserData([{}])
+        })
+      }
+    }
+    console.log(word)
     let options = [{value:"All", label:"All"}]
     return (
       <>
@@ -37,17 +58,23 @@ function SearchPage() {
               <Form.Control
                 type="search"
                 placeholder="Search"
+                onChange={inputText}
                 className="me-2"
                 aria-label="Search"
               />
-              <Button variant="outline-success">Search</Button>
+              <Button onClick={()=>findUsers(word)} variant="outline-success">Search</Button>
             </Form>
         </div>
 
         <div>
           <h3>Users</h3>
           <div style={{border: "5px solid white", height:"20vh"}}>
-
+            {(typeof userData[0]=="object") ? (
+                <p>NO RESULTS</p>
+                
+            ) : (
+              userData["Name"]["name"]
+            )}
           </div>
 
           <h3 style={{marginTop:"5vh"}}>Coins</h3>
