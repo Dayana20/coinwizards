@@ -1,5 +1,6 @@
 body{
-    background-color: rgb(206, 244, 206);
+    background-color: rgb(212, 212, 212);
+    font-family: 'Courier New', Courier, monospace;
 }
 
 #homestyle{
@@ -72,6 +73,12 @@ body{
     font-family: 'Courier New', Courier, monospace;
 }
 
-#cItem{
+.cItem{
     text-align: center;
+    font-size: small;
+}
+
+.cButton{
+    text-decoration: none;
+    color: black;
 }

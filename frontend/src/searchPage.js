@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button"
 import "./css/home.css"
 import Select from "react-select"
+import UserNameList from "./searchList"
 
 
 // search page that comes up after searching for coin/user/post
@@ -11,21 +12,20 @@ import Select from "react-select"
 
 function SearchPage() {
     const [word, setWord] = useState("")
-    const [data, setData] = useState([{}])
+    const [menuData, setMenuData] = useState([{}])
     const [userData, setUserData] = useState([{}])
-
+    const [selectedOption, setSelectedOption] = useState(null)
 
     let inputText = (e) => {
-      setWord(e.target.value.toLowerCase())
+      setWord(e.target.value)
     }
 
-    const [menuData, setMenuData] = useState([{}])
     useEffect(() => {
       fetch("/options").then(
         res => res.json()
       ).then(
           data => {
-            setData(data)
+            setMenuData(data)
         }            
       ). catch((error) => {
         console.error("Error: ", error)
@@ -47,14 +47,82 @@ function SearchPage() {
         })
       }
     }
-    console.log(word)
-    let options = [{value:"All", label:"All"}]
-    return (
-      <>
-        <NavBar/>
-        <div id="searchbar" style={{marginTop:"5vh",marginBottom:"5vh"}}>
+    if(selectedOption == null){
+      return (
+        <>
+          <NavBar/>
+          <div id="searchbar" style={{marginTop:"5vh",marginBottom:"5vh"}}>
+              <Form className="d-flex justify-content-center">
+                <Select 
+                  options={menuData["Choices"]}
+                  onChange={setSelectedOption}
+                  defaultValue={selectedOption}
+                />
+                <Form.Control
+                  type="search"
+                  placeholder="Search"
+                  onChange={inputText}
+                  className="me-2"
+                  aria-label="Search"
+                />
+
+                <Button onClick={()=>findUsers(word)} variant="outline-success">Search</Button>
+              </Form>
+            </div>
+            <div>
+              <h3>Users</h3>
+              <div className="d-flex align-items-center" style={{border: "5px solid white", height:"20vh"}}>
+                <UserNameList input={word}/>
+              </div>
+
+              <h3 style={{marginTop:"5vh"}}>Coins</h3>
+              <div style={{border: "5px solid white", height:"20vh"}}>
+                
+              </div>
+            </div>
+        </>
+      )
+    } else if(selectedOption.label=="users"){
+      return (
+        <>
+          <NavBar/>
+          <div id="searchbar" style={{marginTop:"5vh",marginBottom:"5vh"}}>
             <Form className="d-flex justify-content-center">
-              <Select options={menuData["Choices"]}/>
+              <Select 
+                options={menuData["Choices"]}
+                onChange={setSelectedOption}
+                defaultValue={selectedOption}
+              />
+              <Form.Control
+                type="search"
+                placeholder="Search"
+                onChange={inputText}
+                className="me-2"
+                aria-label="Search"
+              />
+
+              <Button onClick={()=>findUsers(word)} variant="outline-success">Search</Button>
+            </Form>
+          </div>
+          <div>
+              <h3>Users</h3>
+              <div className="d-flex align-items-center" style={{border: "5px solid white", height:"20vh"}}>
+                <UserNameList input={word}/>
+              </div>
+            </div>
+        </>
+      )
+    } else if(selectedOption.label=="coins"){
+      return (
+        <>
+          <NavBar/>
+          <div id="searchbar" style={{marginTop:"5vh",marginBottom:"5vh"}}>
+            <Form className="d-flex justify-content-center">
+              <Select 
+                options={menuData["Choices"]}
+                onChange={setSelectedOption}
+                defaultValue={selectedOption}
+              />
               <Form.Control
                 type="search"
                 placeholder="Search"
@@ -64,34 +132,48 @@ function SearchPage() {
               />
               <Button onClick={()=>findUsers(word)} variant="outline-success">Search</Button>
             </Form>
-        </div>
-
-        <div>
-          <h3>Users</h3>
-          <div className="d-flex align-items-center" style={{border: "5px solid white", height:"20vh"}}>
-            {(typeof userData[0]=="object") ? (
-                 <div className="d-flex align-items-center" style={{border: "5px solid white", height:"15vw", marginLeft:"3vh"}}>
-                  NO RESULT
-                </div>
+          </div>
+          <div>
+              <h3 style={{marginTop:"5vh"}}>Coins</h3>
+              <div style={{border: "5px solid white", height:"20vh"}}>
                 
-            ) : (
-            
-              <div className="d-flex align-items-center" style={{border: "5px solid white", height:"15vw", marginLeft:"3vh"}}>
-                <a href={"/Profile/"+String(userData["Name"]["name"])}>
-                {userData["Name"]["name"]}
-                  </a>
               </div>
-            )}
-          </div>
+            </div>
+        </>
+      )
+    } else{
+        return (
+          <>
+            <NavBar/>
+            <div id="searchbar" style={{marginTop:"5vh",marginBottom:"5vh"}}>
+              <Form className="d-flex justify-content-center">
+                <Select 
+                  options={menuData["Choices"]}
+                  onChange={setSelectedOption}
+                  defaultValue={selectedOption}
+                />
+                <Form.Control
+                  type="search"
+                  placeholder="Search"
+                  onChange={inputText}
+                  className="me-2"
+                  aria-label="Search"
+                />
 
-          <h3 style={{marginTop:"5vh"}}>Coins</h3>
-          <div style={{border: "5px solid white", height:"20vh"}}>
+                <Button onClick={()=>findUsers(word)} variant="outline-success">Search</Button>
+              </Form>
+            </div>
+            <div>
+              <h3>Posts</h3>
+              <div className="d-flex align-items-center" style={{border: "5px solid white", height:"20vh"}}>
+                <UserNameList input={word}/>
+              </div>
+
+            </div>
             
-          </div>
-        </div>
-        
-      </>
-    )
+          </>
+        )
+      }
   }
   
   export default SearchPage
