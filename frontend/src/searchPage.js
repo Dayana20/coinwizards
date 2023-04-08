@@ -5,15 +5,18 @@ import Button from "react-bootstrap/Button"
 import "./css/home.css"
 import Select from "react-select"
 import UserNameList from "./searchList"
+import { useParams } from "react-router-dom"
 
 
 // search page that comes up after searching for coin/user/post
 // would show user + img or coin+logo or post snippet
 
 function SearchPage() {
+    const {id=""} = useParams()
     const [word, setWord] = useState("")
     const [menuData, setMenuData] = useState([{}])
     const [userData, setUserData] = useState([{}])
+    console.log("input data", id, typeof id, id!="TermName", word, typeof word)
     const [selectedOption, setSelectedOption] = useState(null)
 
     let inputText = (e) => {
@@ -30,6 +33,7 @@ function SearchPage() {
       ). catch((error) => {
         console.error("Error: ", error)
       })
+      setWord(id)
     }, [])
 
     let findUsers = (name) => {
@@ -47,10 +51,11 @@ function SearchPage() {
         })
       }
     }
-    if(selectedOption == null){
+
+    if (selectedOption == null){
       return (
         <>
-          <NavBar/>
+         <NavBar/>
           <div id="searchbar" style={{marginTop:"5vh",marginBottom:"5vh"}}>
               <Form className="d-flex justify-content-center">
                 <Select className="selectB"
@@ -64,6 +69,7 @@ function SearchPage() {
                   onChange={inputText}
                   className="me-2"
                   aria-label="Search"
+                  defaultValue={id}
                 />
 
                 <Button onClick={()=>findUsers(word)} variant="outline-success">Search</Button>
@@ -82,6 +88,7 @@ function SearchPage() {
             </div>
         </>
       )
+
     } else if(selectedOption.label=="users"){
       return (
         <>

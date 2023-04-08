@@ -4,7 +4,10 @@ import UserList from "./userList"
 import Search from "./pages/Search/Search"
 import CoinList from "./coinList"
 import "./css/home.css"
-import Login from "./login" 
+import Form from "react-bootstrap/Form"
+import Select from "react-select"
+import Button from "react-bootstrap/Button"
+
 
 
 // Home Page - Logged In
@@ -18,12 +21,26 @@ import Login from "./login"
 
 function Home() {
     const [word, setWord] = useState("")
+    let inputText = (e) => {
+      setWord(e.target.value)
+    }
+
     return (
       <div id="homestyle">
         <NavBar/>
         <h1 id="intro">Welcome!</h1>
         <div>
-          <Search word={word} setWord={setWord} />
+          <Form className="d-flex justify-content-center">
+              <Form.Control
+                type="search"
+                placeholder="Search"
+                onChange={inputText}
+                className="me-2"
+                aria-label="Search"
+              />
+
+              <a href={"Search/"+word}><Button>Search</Button></a>
+            </Form>
         </div>
 
         <div id="itemList">

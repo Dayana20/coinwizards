@@ -27,6 +27,7 @@ ReactDOM.render(
     <Route path="/Coin/" element={<CoinP/>}/>
     <Route path="/Coin/:id" element={<CoinP/>}/>
     <Route path="/Search/" element={<SearchPage/>}/>
+    <Route path="/Search/:id" element={<SearchPage/>}/>
   </Routes>
   </BrowserRouter>,
   document.getElementById("root")
