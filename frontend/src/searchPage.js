@@ -53,7 +53,7 @@ function SearchPage() {
           <NavBar/>
           <div id="searchbar" style={{marginTop:"5vh",marginBottom:"5vh"}}>
               <Form className="d-flex justify-content-center">
-                <Select 
+                <Select className="selectB"
                   options={menuData["Choices"]}
                   onChange={setSelectedOption}
                   defaultValue={selectedOption}
@@ -88,7 +88,7 @@ function SearchPage() {
           <NavBar/>
           <div id="searchbar" style={{marginTop:"5vh",marginBottom:"5vh"}}>
             <Form className="d-flex justify-content-center">
-              <Select 
+              <Select className="selectB"
                 options={menuData["Choices"]}
                 onChange={setSelectedOption}
                 defaultValue={selectedOption}
@@ -118,7 +118,7 @@ function SearchPage() {
           <NavBar/>
           <div id="searchbar" style={{marginTop:"5vh",marginBottom:"5vh"}}>
             <Form className="d-flex justify-content-center">
-              <Select 
+              <Select className="selectB"
                 options={menuData["Choices"]}
                 onChange={setSelectedOption}
                 defaultValue={selectedOption}
@@ -145,9 +145,9 @@ function SearchPage() {
         return (
           <>
             <NavBar/>
-            <div id="searchbar" style={{marginTop:"5vh",marginBottom:"5vh"}}>
+            <div style={{marginTop:"5vh",marginBottom:"5vh"}}>
               <Form className="d-flex justify-content-center">
-                <Select 
+                <Select className="selectB"
                   options={menuData["Choices"]}
                   onChange={setSelectedOption}
                   defaultValue={selectedOption}
