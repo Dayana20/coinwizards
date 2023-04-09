@@ -7,8 +7,6 @@ import Select from "react-select"
 import UserNameList from "./searchList"
 import { useParams } from "react-router-dom"
 
-// search page that comes up after searching for coin/user/post
-// would show user + img or coin+logo or post snippet
 
 function SearchPage() {
     const {id=""} = useParams()
