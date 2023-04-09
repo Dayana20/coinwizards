@@ -7,7 +7,6 @@ import Select from "react-select"
 import UserNameList from "./searchList"
 import { useParams } from "react-router-dom"
 
-
 // search page that comes up after searching for coin/user/post
 // would show user + img or coin+logo or post snippet
 
@@ -18,6 +17,7 @@ function SearchPage() {
     const [userData, setUserData] = useState([{}])
     console.log("input data", id, typeof id, id!="TermName", word, typeof word)
     const [selectedOption, setSelectedOption] = useState(null)
+    const [coinData, setCoinData] = useState({})
 
     let inputText = (e) => {
       setWord(e.target.value)
@@ -29,7 +29,7 @@ function SearchPage() {
       ).then(
           data => {
             setMenuData(data)
-        }            
+        }
       ). catch((error) => {
         console.error("Error: ", error)
       })
@@ -43,14 +43,71 @@ function SearchPage() {
         ).then(
           data => {
             setUserData(data["Data"][name])
-            
-          }            
+
+          }
         ). catch((error) => {
           console.error("Error: ", error)
           setUserData([{}])
         })
       }
     }
+
+    let findCoins = (name) => {
+      if(name!=""){
+        fetch("/coins/details/"+name).then(
+          res => res.json()
+        ).then(
+          data => {
+            setCoinData(data[name])
+            console.log(coinData)
+            // console.log(coinData.name)
+            // console.log(coinData.id)
+          }
+        ). catch((error) => {
+          console.error("Error: ", error)
+          setCoinData({})
+
+        })
+      }
+    }
+
+let showCoinData = ({coin}) => {
+  if (typeof coin !== "undefined") {
+    return (
+      <div>
+          <h2>{coin.name}</h2>
+          <p>Symbol: {coin.symbol}</p>
+          <p>Price: {coin.price}</p>
+          {/* <p>Description: {coin.description}</p> */}
+          <a href={"/Coin/"+coin.name}>Go to page</a>
+        </div>
+  )
+
+  } else {
+
+    return (
+      <div>No coin data available</div>
+    )
+  }
+}
+
+const clearCoinData = () => {
+  setCoinData(null)
+  // setUserData(null)
+}
+
+const handleSearch = (event) => {
+  event.preventDefault()
+  clearCoinData() // clear the coinData state
+  if (selectedOption.label === "coins") {
+    findCoins(word)
+  } else{
+    findUsers(word)
+  }
+}
+
+
+
 
     if (selectedOption == null){
       return (
@@ -83,7 +140,7 @@ function SearchPage() {
 
               <h3 style={{marginTop:"5vh"}}>Coins</h3>
               <div style={{border: "5px solid white", height:"20vh"}}>
-                
+
               </div>
             </div>
         </>
@@ -124,7 +181,7 @@ function SearchPage() {
         <>
           <NavBar/>
           <div id="searchbar" style={{marginTop:"5vh",marginBottom:"5vh"}}>
-            <Form className="d-flex justify-content-center">
+            <Form className="d-flex justify-content-center" onSubmit={handleSearch}>
               <Select className="selectB"
                 options={menuData["Choices"]}
                 onChange={setSelectedOption}
@@ -137,13 +194,13 @@ function SearchPage() {
                 className="me-2"
                 aria-label="Search"
               />
-              <Button onClick={()=>findUsers(word)} variant="outline-success">Search</Button>
+              <Button onClick={()=>findCoins(word)} variant="outline-success">Search</Button>
             </Form>
           </div>
           <div>
               <h3 style={{marginTop:"5vh"}}>Coins</h3>
               <div style={{border: "5px solid white", height:"20vh"}}>
-                
+              {showCoinData({ coin: coinData })}
               </div>
             </div>
         </>
@@ -177,10 +234,10 @@ function SearchPage() {
               </div>
 
             </div>
-            
+
           </>
         )
       }
   }
-  
+
   export default SearchPage
