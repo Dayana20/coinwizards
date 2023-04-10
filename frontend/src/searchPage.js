@@ -14,7 +14,7 @@ function SearchPage() {
     const [word, setWord] = useState("")
     const [menuData, setMenuData] = useState([{}])
     const [userData, setUserData] = useState([{}])
-    console.log("input data", id, typeof id, id!="TermName", word, typeof word)
+    // console.log("input data", id, typeof id, id!="TermName", word, typeof word)
     const [selectedOption, setSelectedOption] = useState(null)
     const [coinData, setCoinData] = useState({})
 
@@ -73,18 +73,18 @@ function SearchPage() {
       }
     }
 
-    let showCoinData = ({coin}) => {
-      console.log("coin data2", coin.name, coin)
-      if (typeof coin !== "undefined") {
-        return (
-          <div className="d-flex flex-row flex-wrap align-items-center justify-content-evenly">
-            <div className="d-flex align-items-center justify-content-center" style={{border: "5px solid white", minWidth:"20vh", maxWidth:"30svh", marginLeft:"3vh",marginBottom:"1rem"}}>
-              <img className="bg-dark rounded-circle img-thumbnail" style={{width: "5rem", height: "5rem", marginBottom:"2vw"}} src={coinData.logo}/>
-              <a id="coinListItem" href={"/Coin/"+coin.name}><h2>{coin.name}</h2></a>
-            </div>
-          </div>
-      )
-    }}
+    // let showCoinData = ({coin}) => {
+    //   console.log("coin data2", coin.name, coin)
+    //   if (typeof coin !== "undefined") {
+    //     return (
+    //       <div className="d-flex flex-row flex-wrap align-items-center justify-content-evenly">
+    //         <div className="d-flex align-items-center justify-content-center" style={{border: "5px solid white", minWidth:"20vh", maxWidth:"30svh", marginLeft:"3vh",marginBottom:"1rem"}}>
+    //           <img className="bg-dark rounded-circle img-thumbnail" style={{width: "5rem", height: "5rem", marginBottom:"2vw"}} src={coinData.logo}/>
+    //           <a id="coinListItem" href={"/Coin/"+coin.name}><h2>{coin.name}</h2></a>
+    //         </div>
+    //       </div>
+    //   )
+    // }}
 
     const clearCoinData = () => {
       setCoinData(null)
@@ -132,7 +132,7 @@ function SearchPage() {
 
             <h3 style={{marginTop:"5vh"}}>Coins</h3>
             <div>
-              <CoinList/>
+              <CoinList input={word}/>
           </div>
           </div>
       </>
@@ -192,8 +192,8 @@ function SearchPage() {
         <div>
             <h3 style={{marginTop:"5vh"}}>Coins</h3>
             <div>
-              <CoinList/>
-              {showCoinData({ coin: coinData })}
+              <CoinList input={word}/>
+              {/* {showCoinData({ coin: coinData })} */}
           </div>
         </div>
       </>
