@@ -60,7 +60,7 @@ function ProfileP() {
                             <div id="coinHeader">Coins Tracked</div>
                             <ul id="coinGroup" className="list-group list-group-flush">
                                 {coinData.length > 0 ? (coinData.map(coin => (
-                                    <a href="#coin" class="list-group-item list-group-item-action" id="coinItem">{coin}</a>
+                                    <a href={"/Coin/" + coin} class="list-group-item list-group-item-action" id="coinItem">{coin}</a>
                                 ))) : (
                                     <h1 id="noneHeader">None!</h1>
                                 )}
