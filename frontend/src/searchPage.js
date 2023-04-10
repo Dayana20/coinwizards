@@ -6,6 +6,7 @@ import "./css/home.css"
 import Select from "react-select"
 import UserNameList from "./searchList"
 import { useParams } from "react-router-dom"
+import CoinList from "./coinList"
 
 
 // search page that comes up after searching for coin/user/post
@@ -52,7 +53,7 @@ function SearchPage() {
       }
     }
 
-    if (selectedOption == null){
+    if (selectedOption == null || selectedOption.label =="all"){
       return (
         <>
          <NavBar/>
@@ -77,13 +78,13 @@ function SearchPage() {
             </div>
             <div>
               <h3>Users</h3>
-              <div className="d-flex align-items-center" style={{border: "5px solid white", height:"20vh"}}>
+              <div className="d-flex align-items-center">
                 <UserNameList input={word}/>
               </div>
 
               <h3 style={{marginTop:"5vh"}}>Coins</h3>
-              <div style={{border: "5px solid white", height:"20vh"}}>
-                
+              <div>
+                <CoinList/>
               </div>
             </div>
         </>
@@ -113,7 +114,7 @@ function SearchPage() {
           </div>
           <div>
               <h3>Users</h3>
-              <div className="d-flex align-items-center" style={{border: "5px solid white", height:"20vh"}}>
+              <div className="d-flex align-items-center">
                 <UserNameList input={word}/>
               </div>
             </div>
@@ -142,8 +143,8 @@ function SearchPage() {
           </div>
           <div>
               <h3 style={{marginTop:"5vh"}}>Coins</h3>
-              <div style={{border: "5px solid white", height:"20vh"}}>
-                
+              <div>
+                <CoinList/>
               </div>
             </div>
         </>
@@ -166,18 +167,15 @@ function SearchPage() {
                   className="me-2"
                   aria-label="Search"
                 />
-
                 <Button onClick={()=>findUsers(word)} variant="outline-success">Search</Button>
               </Form>
             </div>
             <div>
               <h3>Posts</h3>
-              <div className="d-flex align-items-center" style={{border: "5px solid white", height:"20vh"}}>
+              <div className="d-flex align-items-center">
                 <UserNameList input={word}/>
               </div>
-
             </div>
-            
           </>
         )
       }

@@ -30,7 +30,7 @@ function Home() {
         <NavBar/>
         <h1 id="intro">Welcome!</h1>
         <div>
-          <Form className="d-flex justify-content-center">
+          <Form className="d-flex justify-content-center" action={"Search/"+word}>
               <Form.Control
                 type="search"
                 placeholder="Search"
@@ -39,7 +39,7 @@ function Home() {
                 aria-label="Search"
               />
 
-              <a href={"Search/"+word}><Button>Search</Button></a>
+              <a href={"Search/"+word}><Button type="submit">Search</Button></a>
             </Form>
         </div>
 
