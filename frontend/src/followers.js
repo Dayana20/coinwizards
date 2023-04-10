@@ -1,7 +1,7 @@
 import NavBar from "./NavBar"
 import React, { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
-import "./css/profile.css"
+import "./css/follow.css"
 
 function FollowersP() {
     const {id="UserNameHere"} = useParams()
@@ -36,9 +36,10 @@ function FollowersP() {
             ) : validUser ? (
                 <div id="profilePage">
                     <NavBar/>
-                    <div className="container-fluid">
-                        <p className="text-align-center"> 
-                            {followerData.map(e => typeof e == "string"?<div>{e}</div> : "")}
+                    <div id="pageTemp" className="container-fluid">
+                        <h1 id="headerTemp">{id + "'s Followers"}</h1>
+                        <p id="listTemp" className="text-align-center"> 
+                            {followerData.map(e => typeof e == "string"?<a id="itemTemp" href={"/Profile/"+e}>{e}</a> : "")}
                         </p>
                     </div>
                 </div>
