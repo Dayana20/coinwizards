@@ -57,3 +57,54 @@ footer {
     display: flex;
     justify-content: center;
 }
+
+#user-input {
+    margin-bottom: 20px;
+  }
+  
+  #user-input h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  #user-input form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #user-input label {
+    font-size: 1rem;
+    margin-bottom: 5px;
+  }
+  
+  #user-input input[type="text"],
+  #user-input textarea {
+    font-size: 1rem;
+    padding: 5px;
+    margin-bottom: 10px;
+  }
+  
+  #user-input textarea {
+    height: 100px;
+  }
+  
+  #user-input button {
+    font-size: 1rem;
+    padding: 5px;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* style for the post display section */
+  #post-list {
+    margin-top: 10px;
+  }
+  
+  #post-list li {
+    background-color: white;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
