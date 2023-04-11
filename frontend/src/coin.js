@@ -81,7 +81,7 @@ function CoinP(){
                             {(typeof coinData["tags"] === "undefined") ? (
                                 <p>Tags</p>
                             ) : (
-                                <h3 className="cItem d-flex flex-column align-items-center">Tags: {Object.entries(coinData["tags"]).map((elem) => <div className="cButton"> {elem}</div>)}</h3>
+                                <h3 className="cItem d-flex flex-column align-items-center">Tags: {Object.entries(coinData["tags"]).map((elem) => <div key={elem} className="cButton"> {elem}</div>)}</h3>
                             )}
 
                             {(statusLoggedIn == false || followingData == true) ? (
@@ -96,7 +96,7 @@ function CoinP(){
                         {(typeof coinData["urls"] === "undefined") ? (
                             <p>URLS</p>
                         ) : (
-                            <h3 className="cItem d-flex flex-column align-items-center">Urls: {Object.entries(coinData["urls"]).map(([key,value]) => <button> <a className="cButton" href={value}> {key}</a></button>)}</h3>
+                            <h3 className="cItem d-flex flex-column align-items-center">Urls: {Object.entries(coinData["urls"]).map(([key,value]) => <button key={key}> <a className="cButton" href={value}> {key}</a></button>)}</h3>
                         )}
                     </div>
                 </div>

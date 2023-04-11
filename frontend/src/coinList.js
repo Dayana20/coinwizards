@@ -37,10 +37,10 @@ function CoinList(searchBarInput="") {
 			return (
 				<>
 					{filteredCoinData.map(([item,logo]) => (
-						<div className="d-flex flex-row flex-wrap align-items-center justify-content-evenly">
+						<div key={item} className="d-flex flex-row flex-wrap align-items-center justify-content-evenly">
 						<div className="d-flex align-items-center justify-content-center" style={{border: "5px solid white", minWidth:"20vh", maxWidth:"30svh", marginLeft:"3vh",marginBottom:"1rem"}}>
 							<img className="bg-dark rounded-circle img-thumbnail" style={{width: "5rem", height: "5rem", marginBottom:"2vw"}} src={logo}/>
-							<a id="coinListItem" href={"/Coin/"+item}><h2>{item}</h2></a>
+							<a className="coinListItem" href={"/Coin/"+item}><h2>{item}</h2></a>
 						</div>
 						</div>))}
 				</>
@@ -54,7 +54,7 @@ function CoinList(searchBarInput="") {
 		if (typeof data["coins_list"]=="undefined"){
 			return (<div>NO USERS!</div>)
 		} else{
-			return (<div>{data["coins_list"].map(elem =><div><a id="coinListItem" href={"/Coin/"+String(elem.name)}>{elem.name}</a></div>)}</div>)
+			return (<div>{data["coins_list"].map(elem =><div key={elem.name}><a className="coinListItem" href={"/Coin/"+String(elem.name)}>{elem.name}</a></div>)}</div>)
 		}
 	}
 }

@@ -27,7 +27,7 @@ function UserNameList(searchBarInput){
     return(
         <>
             {filteredUserData.map((item) => (
-                <div className="d-flex flex-row flex-wrap align-items-center justify-content-evenly" style={{border: "5px solid white", height:"8vw", marginLeft:"3vh"}}>
+                <div key={item} className="d-flex flex-row flex-wrap align-items-center justify-content-evenly" style={{border: "5px solid white", height:"8vw", marginLeft:"3vh"}}>
                     <a href={"/Profile/"+item}>{item}</a>
                 </div>
             ))}

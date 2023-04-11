@@ -39,23 +39,23 @@ body{
 
 }
 
-#userListItem{
+.userListItem{
     text-decoration: none;
     color:black;
 }
 
-#userListItem:hover{
+.userListItem:hover{
     text-decoration: none;
     color:rgb(253, 214, 19);
     font-weight: bolder;
 }
 
-#coinListItem{
+.coinListItem{
     text-decoration: none;
     color:black;
 }
 
-#coinListItem:hover{
+.coinListItem:hover{
     text-decoration: none;
     color:rgb(115, 200, 109);
     font-weight: bolder;
