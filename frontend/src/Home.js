@@ -33,7 +33,7 @@ function Home() {
           <Form className="d-flex justify-content-center" action={"Search/"+word}>
               <Form.Control
                 type="search"
-                placeholder="Search"
+                placeholder="Search for User or Coin"
                 onChange={inputText}
                 className="me-2"
                 aria-label="Search"

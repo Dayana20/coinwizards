@@ -14,12 +14,11 @@ function CoinP(){
 			res => res.json()
 		).then(
 			data => {
-                setCoinData(data[id])
+                setCoinData(data)
 			}            
 		). catch((error) => {
 			console.error("Error: ", error)
 		})
-        // followingCoin(statusLoggedIn,coinData["name"])
 	}, [])
  
     let CoinFollow =(user,coin) =>{
@@ -62,7 +61,8 @@ function CoinP(){
         })
     }
     const statusLoggedIn = "george"
-    const exist = followingCoin(statusLoggedIn,coinData["name"])
+    console.log(coinData)
+    const exist = followingCoin(statusLoggedIn,id)
     console.log(3,statusLoggedIn, followingData)
     // followingCoin(statusLoggedIn,coinData["name"])
 

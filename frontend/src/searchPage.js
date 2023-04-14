@@ -8,8 +8,6 @@ import UserNameList from "./searchList"
 import { useParams } from "react-router-dom"
 import CoinList from "./coinList"
 
-// endpoint works now
-// need to refresh twice to show new coin tho
 
 function SearchPage() {
     const {id=""} = useParams()
@@ -17,7 +15,8 @@ function SearchPage() {
     const [menuData, setMenuData] = useState([{}])
     const [userData, setUserData] = useState([{}])
     const [selectedOption, setSelectedOption] = useState(null)
-    const [coinData, setCoinData] = useState({})
+    const [newCoinData, setNewCoinData] = useState([{}])
+
 
     let inputText = (e) => {
       setWord(e.target.value)
@@ -39,7 +38,6 @@ function SearchPage() {
     let findAll = (name)=> {
       findUsers(name)
       findCoins(name)
-      console.log("found both")
     }
 
     let findUsers = (name) => {
@@ -58,16 +56,13 @@ function SearchPage() {
     }
 
     let findCoins = (name) => {
+      console.log("In find coins function")
       if(name!=""){
-        fetch("/coins/details/advanced/"+name).then(
+        fetch("/coins/add/"+name).then(
           res => res.json()
         ).then(
           data => {
-            setCoinData(data[name])
-            console.log("coin data", data, typeof data[name].name)
-            if(typeof data[name].name=="string"){
-              console.log(data[name].name)
-            }
+            setNewCoinData(data)
           }
         ). catch((error) => {
           console.error("Error: ", error)
@@ -75,163 +70,148 @@ function SearchPage() {
       }
     }
 
+    console.log("coin data", Object.keys(newCoinData).includes("0"))
     let showCoinData = ({coin}) => {
-      console.log("show coin data", typeof coin.name)
-      if(typeof coin.name=="string"){
+      if(Object.keys(newCoinData).includes("0")){
+        return(
+          <div></div>
+        )
+      } else if(!Object.keys(newCoinData).includes("message")){
         return(
             <div className="d-flex flex-row flex-wrap align-items-center justify-content-evenly">
               <div className="d-flex align-items-center justify-content-center" style={{border: "5px solid white", minWidth:"20vh", maxWidth:"30svh", marginLeft:"3vh",marginBottom:"1rem"}}>
-                <img className="bg-dark rounded-circle img-thumbnail" style={{width: "5rem", height: "5rem", marginBottom:"2vw"}} src={coinData.logo}/>
+                <img className="bg-dark rounded-circle img-thumbnail" style={{width: "5rem", height: "5rem", marginBottom:"2vw"}} src={coin.logo}/>
                 <a className="coinListItem" href={"/Coin/"+coin.name}><h2>{coin.name}</h2></a>
               </div>
             </div>
             )
-    }}
-
-    // const clearCoinData = () => {
-    //   setCoinData(null)
-    //   // setUserData(null)
-    // }
-
-    // const handleSearch = (event) => {
-    //   event.preventDefault()
-    //   clearCoinData() // clear the coinData state
-    //   if (selectedOption.label === "coins") {
-    //     findCoins(word)
-    //   } else{
-    //     findUsers(word)
-    //   }
-    // }
-
-    if (selectedOption == null || selectedOption.label =="all"){
-      return (
-        <>
-      <NavBar/>
-        <div id="searchbar" style={{marginTop:"5vh",marginBottom:"5vh"}}>
-            <Form className="d-flex justify-content-center">
-              <Select className="selectB"
-                options={menuData["Choices"]}
-                onChange={setSelectedOption}
-                defaultValue={selectedOption}
-              />
-              <Form.Control
-                type="search"
-                placeholder="Search"
-                onChange={inputText}
-                className="me-2"
-                aria-label="Search"
-                defaultValue={id}
-              />
-
-              <Button onClick={()=>findAll(word)} variant="outline-success">Search</Button>
-            </Form>
-          </div>
-          <div>
-            <h3>Users</h3>
-            <div className="d-flex align-items-center">
-              <UserNameList input={word}/>
-            </div>
-
-            <h3 style={{marginTop:"5vh"}}>Coins</h3>
-            <div>
-              <CoinList input={word}/>
-              {showCoinData({ coin: coinData })}
-
-          </div>
-          </div>
-      </>
-    )
-  } else if(selectedOption.label=="users"){
+      }
+      else{
+        return(
+          <h5>No Coins Found</h5>
+        )
+      }
+    }
     return (
       <>
         <NavBar/>
-        <div id="searchbar" style={{marginTop:"5vh",marginBottom:"5vh"}}>
-          <Form className="d-flex justify-content-center">
-            <Select className="selectB"
-              options={menuData["Choices"]}
-              onChange={setSelectedOption}
-              defaultValue={selectedOption}
-            />
-            <Form.Control
-              type="search"
-              placeholder="Search"
-              onChange={inputText}
-              className="me-2"
-              aria-label="Search"
-            />
-
-            <Button onClick={()=>findUsers(word)} variant="outline-success">Search</Button>
-          </Form>
-        </div>
-        <div>
-            <h3>Users</h3>
-            <div className="d-flex align-items-center">
-              <UserNameList input={word}/>
-            </div>
-          </div>
-        
-      </>
-    )
-  } else if(selectedOption.label=="coins"){
-    return (
-      <>
-        <NavBar/>
-        <div id="searchbar" style={{marginTop:"5vh",marginBottom:"5vh"}}>
-          <Form className="d-flex justify-content-center">
-          {/* <Form className="d-flex justify-content-center" onSubmit={handleSearch}> */}
-            <Select className="selectB"
-              options={menuData["Choices"]}
-              onChange={setSelectedOption}
-              defaultValue={selectedOption}
-            />
-            <Form.Control
-              type="search"
-              placeholder="Search"
-              onChange={inputText}
-              className="me-2"
-              aria-label="Search"
-            />
-            <Button onClick={()=>findCoins(word)} variant="outline-success">Search</Button>
-          </Form>
-        </div>
-        <div>
-            <h3 style={{marginTop:"5vh"}}>Coins</h3>
-            <div>
-              <CoinList input={word}/>
-              {showCoinData({"name":"house"})}
-          </div>
-        </div>
-      </>
-    )
-  } else{
-      return (
-        <>
-          <NavBar/>
-          <div style={{marginTop:"5vh",marginBottom:"5vh"}}>
-            <Form className="d-flex justify-content-center">
-              <Select className="selectB"
-                options={menuData["Choices"]}
-                onChange={setSelectedOption}
-                defaultValue={selectedOption}
-              />
-              <Form.Control
-                type="search"
-                placeholder="Search"
-                onChange={inputText}
-                className="me-2"
-                aria-label="Search"
-              />
-              <Button onClick={()=>findUsers(word)} variant="outline-success">Search</Button>
-            </Form>
-          </div>
           <div>
-            <h3>Posts</h3>
-            <div className="d-flex align-items-center">
-              <UserNameList input={word}/>
-            </div>
-          </div>
-        </>
-      )}
-  }
+            {(selectedOption == null || selectedOption.label =="All")? 
+            <div>
+              <div id="searchbar" style={{marginTop:"5vh",marginBottom:"5vh"}}>
+              <Form className="d-flex justify-content-center">
+                <Select className="selectB"
+                  options={menuData["Choices"]}
+                  onChange={setSelectedOption}
+                  placeholder={"All"}
+                />
+                <Form.Control
+                  type="search"
+                  placeholder="Search For Coin or User"
+                  onChange={inputText}
+                  className="me-2"
+                  aria-label="Search"
+                  defaultValue={id}
+                />
+                
+                <Button onClick={()=>findAll(word)} variant="outline-success">Search</Button>
+              </Form>
+              </div>
+              <h3>Users</h3>
+              <div className="d-flex align-items-center">
+                <UserNameList input={word}/>
+              </div>
 
+              <h3 style={{marginTop:"5vh"}}>Coins</h3>
+              <div>
+                {(Object.keys(newCoinData).includes("0"))?(
+                  <CoinList input={word}/>
+                ) : (
+                  showCoinData({ coin: newCoinData })
+                )}
+
+              </div>
+            </div>
+            : (selectedOption.label =="Users") ? 
+            <div>
+              <div id="searchbar" style={{marginTop:"5vh",marginBottom:"5vh"}}>
+                <Form className="d-flex justify-content-center">
+                  <Select className="selectB"
+                    options={menuData["Choices"]}
+                    onChange={setSelectedOption}
+                    placeholder={"Users"}
+                  />
+                  <Form.Control
+                    type="search"
+                    placeholder="Search For User"
+                    onChange={inputText}
+                    className="me-2"
+                    aria-label="Search"
+                    defaultValue={id}
+                  />
+                  
+                  <Button onClick={()=>findAll(word)} variant="outline-success">Search</Button>
+                </Form>
+              </div>
+              <h3>Users</h3>
+              <div className="d-flex align-items-center">
+                <UserNameList input={word}/>
+              </div>
+            </div>
+            :  (selectedOption.label =="Coins") ? 
+            <div>
+                <div id="searchbar" style={{marginTop:"5vh",marginBottom:"5vh"}}>
+                <Form className="d-flex justify-content-center">
+                  <Select className="selectB"
+                    options={menuData["Choices"]}
+                    onChange={setSelectedOption}
+                    placeholder={"Coins"}
+                  />
+                  <Form.Control
+                    type="search"
+                    placeholder="Search For Coin"
+                    onChange={inputText}
+                    className="me-2"
+                    aria-label="Search"
+                    defaultValue={id}
+                  />
+                  
+                  <Button onClick={()=>findAll(word)} variant="outline-success">Search</Button>
+                </Form>
+              </div>
+              {(Object.keys(newCoinData).includes("0"))?(
+                <CoinList input={word}/>
+              ) : (
+                showCoinData({ coin: newCoinData })
+              )}
+            </div>
+            : <div>
+              <div id="searchbar" style={{marginTop:"5vh",marginBottom:"5vh"}}>
+                <Form className="d-flex justify-content-center">
+                  <Select className="selectB"
+                    options={menuData["Choices"]}
+                    onChange={setSelectedOption}
+                    placeholder={"Coins"}
+                  />
+                  <Form.Control
+                    type="search"
+                    placeholder="Search For Coin"
+                    onChange={inputText}
+                    className="me-2"
+                    aria-label="Search"
+                    defaultValue={id}
+                  />
+                  
+                  <Button onClick={()=>findAll(word)} variant="outline-success">Search</Button>
+                </Form>
+              </div>
+              Coming Soon
+              </div>
+            }
+
+
+          </div>
+      </>
+  )
+} 
   export default SearchPage
