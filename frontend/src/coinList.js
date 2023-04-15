@@ -36,13 +36,16 @@ function CoinList(searchBarInput="") {
 			})
 			return (
 				<>
-					{filteredCoinData.map(([item,logo]) => (
-						<div key={item} className="d-flex flex-row flex-wrap align-items-center justify-content-evenly">
-						<div className="d-flex align-items-center justify-content-center" style={{border: "5px solid white", minWidth:"20vh", maxWidth:"30svh", marginLeft:"3vh",marginBottom:"1rem"}}>
-							<img className="bg-dark rounded-circle img-thumbnail" style={{width: "5rem", height: "5rem", marginBottom:"2vw"}} src={logo}/>
-							<a className="coinListItem" href={"/Coin/"+item}><h2>{item}</h2></a>
-						</div>
-						</div>))}
+					{(filteredCoinData.length==0)?(
+						<h5>No Coins Found In List</h5>
+					): (
+						filteredCoinData.map(([item,logo]) => (
+							<div key={item} className="d-flex flex-row align-items-center justify-content-evenly" style={{width:"20rem", height:"7rem", marginLeft:"3vh"}}>
+								<img className="bg-dark rounded-circle img-thumbnail" style={{width: "5rem", height: "5rem", marginBottom:"2vw"}} src={logo}/>
+								<a className="coinListItem" href={"/Coin/"+item}><h2>{item}</h2></a>
+							</div>
+							))
+					)}
 				</>
 				)
 		} else{
@@ -52,7 +55,7 @@ function CoinList(searchBarInput="") {
 	} else{
 		// console.log("data!", typeof data["users_list"])
 		if (typeof data["coins_list"]=="undefined"){
-			return (<div>NO USERS!</div>)
+			return (<div>No Coins!</div>)
 		} else{
 			return (<div>{data["coins_list"].map(elem =><div key={elem.name}><a className="coinListItem" href={"/Coin/"+String(elem.name)}>{elem.name}</a></div>)}</div>)
 		}

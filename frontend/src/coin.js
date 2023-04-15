@@ -61,7 +61,7 @@ function CoinP(){
         })
     }
     const statusLoggedIn = "george"
-    console.log(coinData)
+    // console.log(coinDatap)
     const exist = followingCoin(statusLoggedIn,id)
     console.log(3,statusLoggedIn, followingData)
     // followingCoin(statusLoggedIn,coinData["name"])
@@ -69,9 +69,9 @@ function CoinP(){
     return(
         <>
             <NavBar/>
-            <div className="d-flex flex-column">
-                <div className="d-flex flex-row align-items-center">
-                    <div className="d-flex flex-column align-items-start">
+            <div id="coinPage">
+                <div className="d-flex justify-content-around">
+                    <div className="d-flex flex-column align-items-center">
                         <img className="bg-dark rounded-circle img-thumbnail" style={{width: "10rem", height: "10rem", marginBottom:"2vw"}} src={coinData["logo"]}/>
                         <div className="d-flex flex-column justify-content-center">
                             <h3 className="cItem">{coinData["name"]}</h3>
@@ -81,7 +81,7 @@ function CoinP(){
                             {(typeof coinData["tags"] === "undefined") ? (
                                 <p>Tags</p>
                             ) : (
-                                <h3 className="cItem d-flex flex-column align-items-center">Tags: {Object.entries(coinData["tags"]).map((elem) => <div key={elem} className="cButton"> {elem}</div>)}</h3>
+                                <h3 className="cItem d-flex flex-column align-items-center">Tags: {Object.entries(coinData["tags"]).map(([index,elem]) => <div key={elem} className="cButton"> {elem}</div>)}</h3>
                             )}
 
                             {(statusLoggedIn == false || followingData == true) ? (
@@ -90,9 +90,10 @@ function CoinP(){
                                 <button onClick={()=>CoinFollow(statusLoggedIn,coinData["name"])}> Follow </button>
                             )}
                         </div>
-                    </div>                    
-                    <div className="d-flex flex-column justify-content-center" style={{marginTop:"5vw", marginLeft:"5vw", marginRight:"5vw"}}>
-                        <h3 className="cItem">Description: {coinData["description"]}</h3>
+                    </div>    
+
+                    <div className="d-flex flex-column justify-content-center">
+                        <h3 id="descriptionItem">Description: {coinData["description"]}</h3>
                         {(typeof coinData["urls"] === "undefined") ? (
                             <p>URLS</p>
                         ) : (

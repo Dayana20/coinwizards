@@ -7,7 +7,7 @@ import "./css/home.css"
 import Form from "react-bootstrap/Form"
 import Select from "react-select"
 import Button from "react-bootstrap/Button"
-
+import SearchPage from "./searchPage"
 
 
 // Home Page - Logged In
@@ -24,7 +24,7 @@ function Home() {
     let inputText = (e) => {
       setWord(e.target.value)
     }
-
+    
     return (
       <div id="homestyle">
         <NavBar/>
@@ -38,7 +38,6 @@ function Home() {
                 className="me-2"
                 aria-label="Search"
               />
-
               <a href={"Search/"+word}><Button type="submit">Search</Button></a>
             </Form>
         </div>

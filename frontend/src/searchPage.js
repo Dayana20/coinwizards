@@ -79,7 +79,7 @@ function SearchPage() {
       } else if(!Object.keys(newCoinData).includes("message")){
         return(
             <div className="d-flex flex-row flex-wrap align-items-center justify-content-evenly">
-              <div className="d-flex align-items-center justify-content-center" style={{border: "5px solid white", minWidth:"20vh", maxWidth:"30svh", marginLeft:"3vh",marginBottom:"1rem"}}>
+              <div className="d-flex align-items-center justify-content-center" style={{minWidth:"20vh", maxWidth:"30svh", marginLeft:"3vh",marginBottom:"1rem"}}>
                 <img className="bg-dark rounded-circle img-thumbnail" style={{width: "5rem", height: "5rem", marginBottom:"2vw"}} src={coin.logo}/>
                 <a className="coinListItem" href={"/Coin/"+coin.name}><h2>{coin.name}</h2></a>
               </div>
@@ -88,10 +88,11 @@ function SearchPage() {
       }
       else{
         return(
-          <h5>No Coins Found</h5>
+          <h5>No Coins Found!</h5>
         )
       }
     }
+    console.log("id",id, word, newCoinData["name"])
     return (
       <>
         <NavBar/>
@@ -118,17 +119,16 @@ function SearchPage() {
               </Form>
               </div>
               <h3>Users</h3>
-              <div className="d-flex align-items-center">
+              <div className="d-flex align-items-center flex-wrap">
                 <UserNameList input={word}/>
               </div>
 
               <h3 style={{marginTop:"5vh"}}>Coins</h3>
-              <div>
-                {(Object.keys(newCoinData).includes("0"))?(
-                  <CoinList input={word}/>
-                ) : (
-                  showCoinData({ coin: newCoinData })
-                )}
+              <div className="d-flex align-items-center flex-wrap">
+                {(Object.keys(newCoinData).includes("0") && id!="")? showCoinData({ coin: findCoins(word) })
+                : (word!=id || word!=newCoinData["name"] || id=="")? <CoinList input={word}/>
+                : showCoinData({ coin: newCoinData})
+                }
 
               </div>
             </div>
@@ -154,7 +154,7 @@ function SearchPage() {
                 </Form>
               </div>
               <h3>Users</h3>
-              <div className="d-flex align-items-center">
+              <div className="d-flex align-items-center flex-wrap">
                 <UserNameList input={word}/>
               </div>
             </div>
@@ -179,11 +179,12 @@ function SearchPage() {
                   <Button onClick={()=>findAll(word)} variant="outline-success">Search</Button>
                 </Form>
               </div>
-              {(Object.keys(newCoinData).includes("0"))?(
-                <CoinList input={word}/>
-              ) : (
-                showCoinData({ coin: newCoinData })
-              )}
+              <div className="d-flex align-items-center flex-wrap">
+                {(Object.keys(newCoinData).includes("0") || word!=id)? <CoinList input={word}/> 
+                : (word!=newCoinData["name"])? <CoinList input={word}/> 
+                : showCoinData({ coin: newCoinData })
+                }
+              </div>
             </div>
             : <div>
               <div id="searchbar" style={{marginTop:"5vh",marginBottom:"5vh"}}>
