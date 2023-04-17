@@ -12,6 +12,7 @@ function ProfileP() {
     const [followingData, setFGData] = useState([{}])
     const [coinData, setCoinData] = useState([{}])
     const [validUser, setValidUser] = useState([{}])
+    const [followingUsers, setFollowingUsers] = useState([])
 
     useEffect(() => {
 		fetch(`/users/details/${id}`).then(
@@ -21,6 +22,7 @@ function ProfileP() {
 				setFData(data["Data"][id]["Name"]["Followers"])
                 setFGData(data["Data"][id]["Name"]["Following"])
                 setCoinData(data["Data"][id]["Name"]["coins"])
+                setFollowingUsers(data["Data"][id]["Name"]["Following"])
                 setValidUser(true)
                 setLoading(false)
 			}            
@@ -72,8 +74,16 @@ function ProfileP() {
                         </div>
 
                         <div id="placeholderCol">
-
-                        </div>
+                            <div id="followingHeader">Following</div>
+                                <ul id="followingGroup" className="list-group list-group-flush">
+                                    {followingUsers.length > 0 ? (followingUsers.map(user => (
+                                        <a href={"/Profile/" + user} className="list-group-item list-group-item-action" id="followingItem">{user}</a>
+                                    ))
+                                    ) : (
+                                    <h1 id="noneHeader">Not following anyone!</h1>
+                                    )}
+                                </ul>
+                            </div>
                         
                         <div id="placeholderCol2">
 
