@@ -4,11 +4,18 @@ import Nav from "react-bootstrap/Nav"
 import Navbar from "react-bootstrap/Navbar"
 import NavDropdown from "react-bootstrap/NavDropdown"
 import "bootstrap/dist/css/bootstrap.css"
-import Login from "./login" 
+// import {login_STATUS} from "./login"
+
+// console.log("here! nav!", login_STATUS)
+function logout(){
+    localStorage.setItem("stat","false")
+    localStorage.setItem("username",null)
+}
 
 // used https://react-bootstrap.github.io/components/navbar/ as foundation
 function NavBar() {
-	if (Login()==false){
+	let status = localStorage.getItem("stat")
+	if (status=="false"){
 		return (
 			<div id="homestyle">
 				<Navbar bg="light" expand="lg">
@@ -21,6 +28,8 @@ function NavBar() {
 								style={{ maxHeight: "100px" }}
 								navbarScroll
 							>
+							<Nav.Link href="/login">Login/Sign Up?</Nav.Link>
+							
 								{/* <NavDropdown title="Settings" id="settingsDropdown">
 									<NavDropdown.Item href="#action4">Privacy</NavDropdown.Item>
 									<NavDropdown.Divider />
@@ -38,7 +47,7 @@ function NavBar() {
 		
 		)
 	} else{
-
+		let user = localStorage.getItem("username")
 		return (
 			<div id="homestyle">
 				<Navbar bg="light" expand="lg">
@@ -52,11 +61,11 @@ function NavBar() {
 								navbarScroll
 							>
 								<Nav.Link href="/">Home</Nav.Link>
-								<Nav.Link href={"/Profile/"+String("user1")}>Profile</Nav.Link>
+								<Nav.Link href={"/Profile/"+user}>Profile</Nav.Link>
 								<NavDropdown title="Settings" id="settingsDropdown">
 									<NavDropdown.Item href="#action4">Privacy</NavDropdown.Item>
 									<NavDropdown.Divider />
-									<NavDropdown.Item href="#action5">Log Out</NavDropdown.Item>
+									<NavDropdown.Item href="/login"><button onClick={logout}>Log Out!</button></NavDropdown.Item>
 								</NavDropdown>
 							</Nav>
 

@@ -12,26 +12,49 @@ import reportWebVitals from "./reportWebVitals"
 import {BrowserRouter, Route, Routes} from "react-router-dom"
 import SearchPage from "./searchPage"
 import RegistrationPage from "./registration"
+import Login from "./login"
+// import {login_STATUS} from "./login"
 
-
-ReactDOM.render(
-  <BrowserRouter>
-  <Routes>
-    <Route path="/" element={<Home/>}/>
-    <Route path="/Home" element={<Home/>}/>
-    <Route path="/Profile/" element={<ProfileP/>}/>
-    <Route path="/login/" element={<login/>}/>
-    <Route path="/Profile/:id" element={<ProfileP/>}/>
-    <Route path="/Profile/:id/followers" element={<FollowersP/>}/>
-    <Route path="/Profile/:id/following" element={<FollowingP/>}/>
-    <Route path="/Coin/" element={<CoinP/>}/>
-    <Route path="/Coin/:id" element={<CoinP/>}/>
-    <Route path="/Search/" element={<SearchPage/>}/>
-    <Route path="/Search/:id" element={<SearchPage/>}/>
-  </Routes>
-  </BrowserRouter>,
-  document.getElementById("root")
-)
+// export var login_STATUS = false
+let status = localStorage.getItem("stat")
+if(status=="false"){
+  // logged in
+  ReactDOM.render(
+    <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Home/>}/>
+      <Route path="/Home" element={<Home/>}/>
+      <Route path="/Profile/" element={<ProfileP/>}/>
+      <Route path="/login/" element={<Login/>}/>
+      <Route path="/Profile/:id" element={<ProfileP/>}/>
+      <Route path="/Profile/:id/followers" element={<FollowersP/>}/>
+      <Route path="/Profile/:id/following" element={<FollowingP/>}/>
+      <Route path="/Coin/" element={<CoinP/>}/>
+      <Route path="/Coin/:id" element={<CoinP/>}/>
+      <Route path="/Search/" element={<SearchPage/>}/>
+      <Route path="/Search/:id" element={<SearchPage/>}/>
+    </Routes>
+    </BrowserRouter>,
+    document.getElementById("root")
+  )
+} else{
+  ReactDOM.render(
+    <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Home/>}/>
+      <Route path="/Home" element={<Home/>}/>
+      <Route path="/Profile/:id" element={<ProfileP/>}/>
+      <Route path="/Profile/:id/followers" element={<FollowersP/>}/>
+      <Route path="/Profile/:id/following" element={<FollowingP/>}/>
+      <Route path="/Coin/" element={<CoinP/>}/>
+      <Route path="/Coin/:id" element={<CoinP/>}/>
+      <Route path="/Search/" element={<SearchPage/>}/>
+      <Route path="/Search/:id" element={<SearchPage/>}/>
+    </Routes>
+    </BrowserRouter>,
+    document.getElementById("root")
+  )
+}
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

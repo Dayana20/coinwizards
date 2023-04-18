@@ -1,7 +1,6 @@
 import NavBar from "./NavBar"
 import React, { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
-// import Login from "./login" 
 
 function CoinP(){
     const {id="CoinNameHere"} = useParams()
@@ -26,13 +25,16 @@ function CoinP(){
             res => res.json()
         ).then(
             data => {
-                data
+                // if(!Object.keys(data).includes("message")){
+                //     setFollowData(data)
+                // }
+                console.log("unfollowing data", data)
             }            
         ). catch((error) => {
             console.error("Error: ", error)
         })
         alert("You are now following "+String(coin))
-        window.location.reload()
+        // window.location.reload()
     }
 
     let unfollowCoin =(user,coin) =>{
@@ -40,13 +42,16 @@ function CoinP(){
             res => res.json()
         ).then(
             data => {
-                data
+                // if(!Object.keys(data).includes("message")){
+                //     setFollowData(data)
+                // }
+                console.log("unfollowing data", data)
             }            
         ). catch((error) => {
             console.error("Error: ", error)
         })
         alert("You are now unfollowing "+String(coin))
-        window.location.reload()
+        // window.location.reload()
     }
     
     let followingCoin =(user,coin) =>{
@@ -54,16 +59,23 @@ function CoinP(){
             res => res.json()
         ).then(
             data => {
-                setFollowData(data)
+                console.log("following coin ", data)
+                if(!Object.keys(data).includes("message")){
+                    setFollowData(data)
+                }
             }            
         ). catch((error) => {
             console.error("Error: ", error)
         })
     }
-    const statusLoggedIn = "george"
+    const user = localStorage.getItem("username")
+    const loggedIn = localStorage.getItem("stat")
     // console.log(coinDatap)
-    const exist = followingCoin(statusLoggedIn,id)
-    console.log(3,statusLoggedIn, followingData)
+    if(loggedIn!="false"){
+        const exist = followingCoin(user,id)
+        console.log(3,user, loggedIn, followingData)
+
+    }
     // followingCoin(statusLoggedIn,coinData["name"])
 
     return(
@@ -84,10 +96,11 @@ function CoinP(){
                                 <h3 className="cItem d-flex flex-column align-items-center">Tags: {Object.entries(coinData["tags"]).map(([index,elem]) => <div key={elem} className="cButton"> {elem}</div>)}</h3>
                             )}
 
-                            {(statusLoggedIn == false || followingData == true) ? (
-                                <button onClick={()=>unfollowCoin(statusLoggedIn,coinData["name"])}> Unfollow </button>
-                            ) : (
-                                <button onClick={()=>CoinFollow(statusLoggedIn,coinData["name"])}> Follow </button>
+                            {(loggedIn!="false" && followingData == false)? <button onClick={()=>CoinFollow(user,coinData["name"])}> Follow </button>
+                            :(loggedIn!="false" && followingData == true) ? <button onClick={()=>unfollowCoin(user,coinData["name"])}> Unfollow </button>
+                            : (
+                                <div></div>
+                                // <button onClick={()=>CoinFollow(user,coinData["name"])}> Follow </button>
                             )}
                         </div>
                     </div>    
