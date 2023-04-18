@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import axiosInstance from "./helpers/axios"
 // import React from "react"
 // import { BrowserRouter, Route, Routes } from "react-router"
 // import "./App.css"
@@ -41,8 +42,8 @@ function Login(){
     const [data, setData] = useState([{}])
 	// PASSWORD IS ENCRYPT SO NEED TO DECRYPT FIRST TO COMPAREÍ
     useEffect(() => {
-		fetch("/users/login/user1/string").then(
-			res => res.json()
+		axiosInstance.get("/users/login/user1/string").then(
+			res => res.data
 		).then(
 			data => {
 				setData(data)

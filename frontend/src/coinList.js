@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react"
+import axiosInstance from "./helpers/axios"
 import "./css/home.css"
 
 function CoinList(searchBarInput="") {
 	const [data, setData] = useState([{}])
 	const [coinDetData, setDetData] = useState([{}])
 	useEffect(() => {
-		fetch("/coins/list").then(
-			res => res.json()
+		axiosInstance.get("/coins/list").then(
+			res => res.data
 		).then(
 			data => {
 				setData(data)

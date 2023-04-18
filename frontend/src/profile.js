@@ -1,5 +1,6 @@
-import NavBar from "./NavBar"
 import React, { useState, useEffect } from "react"
+import axiosInstance from "./helpers/axios"
+import NavBar from "./NavBar"
 import { useParams } from "react-router-dom"
 import "./css/profile.css"
 import blank_profile from "./assets/blank_profile.jpg"
@@ -15,8 +16,8 @@ function ProfileP() {
     const [followingUsers, setFollowingUsers] = useState([])
 
     useEffect(() => {
-		fetch(`/users/details/${id}`).then(
-			res => res.json()
+		axiosInstance.get(`/users/details/${id}`).then(
+			res => res.data
 		).then(
 			data => {
 				setFData(data["Data"][id]["Name"]["Followers"])

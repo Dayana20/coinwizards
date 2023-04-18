@@ -1,5 +1,6 @@
-import NavBar from "./NavBar"
 import React, { useState, useEffect } from "react"
+import axiosInstance from "./helpers/axios"
+import NavBar from "./NavBar"
 import { useParams } from "react-router-dom"
 // import Login from "./login" 
 
@@ -10,8 +11,8 @@ function CoinP(){
     // login not working for now
     // temp solution - user specific user geoge
     useEffect(() => {
-		fetch(`/coins/details/${id}`).then(
-			res => res.json()
+		axiosInstance.get(`/coins/details/${id}`).then(
+			res => res.data
 		).then(
 			data => {
                 setCoinData(data)
@@ -22,8 +23,8 @@ function CoinP(){
 	}, [])
  
     let CoinFollow =(user,coin) =>{
-        fetch("/users/coins/follow/"+user+"/"+coin).then(
-            res => res.json()
+        axiosInstance.put("/users/coins/follow/"+user+"/"+coin).then(
+            res => res.data
         ).then(
             data => {
                 data
@@ -36,8 +37,8 @@ function CoinP(){
     }
 
     let unfollowCoin =(user,coin) =>{
-        fetch("/users/coins/remove/follow/"+user+"/"+coin).then(
-            res => res.json()
+        axiosInstance.put("/users/coins/remove/follow/"+user+"/"+coin).then(
+            res => res.data
         ).then(
             data => {
                 data
@@ -50,8 +51,8 @@ function CoinP(){
     }
     
     let followingCoin =(user,coin) =>{
-        fetch("/users/coins/exist/"+user+"/"+coin).then(
-            res => res.json()
+        axiosInstance.get("/users/coins/exist/"+user+"/"+coin).then(
+            res => res.data
         ).then(
             data => {
                 setFollowData(data)

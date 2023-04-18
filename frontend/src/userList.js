@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react"
+import axiosInstance from "./helpers/axios"
 import "./css/home.css"
 
 function UserList() {
 	const [data, setData] = useState([{}])
 	useEffect(() => {
-		fetch("/users/list").then(
-			res => res.json()
+		axiosInstance.get("/users/list").then(
+			res => res.data
 		).then(
 			data => {
 				setData(data)
-				// console.log("fetched:", data["users_list"])
 			}            
 		). catch((error) => {
 			console.error("Error: ", error)
