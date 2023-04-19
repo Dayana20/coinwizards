@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import axiosInstance from "./helpers/axios"
 import NavBar from "./NavBar"
 import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button"
@@ -23,8 +24,8 @@ function SearchPage() {
     }
 
     useEffect(() => {
-      fetch("/options").then(
-        res => res.json()
+      axiosInstance.get("/options").then(
+        res => res.data
       ).then(
           data => {
             setMenuData(data)
@@ -42,8 +43,8 @@ function SearchPage() {
 
     let findUsers = (name) => {
       if(name!=""){
-        fetch("/users/details/"+name).then(
-          res => res.json()
+        axiosInstance.get("/users/details/"+name).then(
+          res => res.data
         ).then(
           data => {
             setUserData(data["Data"][name])
@@ -58,8 +59,8 @@ function SearchPage() {
     let findCoins = (name) => {
       console.log("In find coins function")
       if(name!=""){
-        fetch("/coins/add/"+name).then(
-          res => res.json()
+        axiosInstance.put("/coins/add/"+name).then(
+          res => res.data
         ).then(
           data => {
             setNewCoinData(data)

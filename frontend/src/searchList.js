@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react"
+import axiosInstance from "./helpers/axios"
 
 // https://dev.to/salehmubashar/search-bar-in-react-js-545l
 
 function UserNameList(searchBarInput){
     const [data, setData] = useState([])
 	useEffect(() => {
-		fetch("/users/list/names").then(
-			res => res.json()
+		axiosInstance.get("/users/list/names").then(
+			res => res.data
 		).then(
 			data => {
 				setData(data)

@@ -1,5 +1,6 @@
-import NavBar from "./NavBar"
 import React, { useState, useEffect } from "react"
+import axiosInstance from "./helpers/axios"
+import NavBar from "./NavBar"
 import { useParams } from "react-router-dom"
 
 function CoinP(){
@@ -9,8 +10,8 @@ function CoinP(){
     // login not working for now
     // temp solution - user specific user geoge
     useEffect(() => {
-		fetch(`/coins/details/${id}`).then(
-			res => res.json()
+		axiosInstance.get(`/coins/details/${id}`).then(
+			res => res.data
 		).then(
 			data => {
                 setCoinData(data)
@@ -21,25 +22,25 @@ function CoinP(){
 	}, [])
  
     let CoinFollow =(user,coin) =>{
-        fetch("/users/coins/follow/"+user+"/"+coin).then(
-            res => res.json()
+        axiosInstance.put("/users/coins/follow/"+user+"/"+coin).then(
+            res => res.data
         ).then(
             data => {
                 // if(!Object.keys(data).includes("message")){
                 //     setFollowData(data)
                 // }
-                console.log("unfollowing data", data)
+                console.log("Following data", data)
             }            
         ). catch((error) => {
             console.error("Error: ", error)
         })
         alert("You are now following "+String(coin))
-        // window.location.reload()
+        window.location.reload()
     }
 
     let unfollowCoin =(user,coin) =>{
-        fetch("/users/coins/remove/follow/"+user+"/"+coin).then(
-            res => res.json()
+        axiosInstance.put("/users/coins/remove/follow/"+user+"/"+coin).then(
+            res => res.data
         ).then(
             data => {
                 // if(!Object.keys(data).includes("message")){
@@ -51,12 +52,12 @@ function CoinP(){
             console.error("Error: ", error)
         })
         alert("You are now unfollowing "+String(coin))
-        // window.location.reload()
+        window.location.reload()
     }
     
     let followingCoin =(user,coin) =>{
-        fetch("/users/coins/exist/"+user+"/"+coin).then(
-            res => res.json()
+        axiosInstance.get("/users/coins/exist/"+user+"/"+coin).then(
+            res => res.data
         ).then(
             data => {
                 console.log("following coin ", data)

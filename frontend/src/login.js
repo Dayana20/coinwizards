@@ -2,8 +2,12 @@ import React, { useState, useEffect } from "react"
 import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button"
 import NavBar from "./NavBar"
+import axiosInstance from "./helpers/axios"
+// import axiosInstance from "./axios"
+
 // import { login_STATUS } from "."
 // import {MDBContainer, MDBCol, MDBRow, MDBBtn, MDBIcon, MDBInput, MDBCheckbox } from "mdb-react-ui-kit"
+// import React from "react"
 // import { BrowserRouter, Route, Routes } from "react-router"
 // import "./App.css"
 // import Dashboard from "../Dashboard/Dashboard"
@@ -47,7 +51,7 @@ function Login(){
     const [loginData, setData] = useState([{}])
     const [userName, setuserData] = useState(null)
     const [pW, setpwData] = useState(null)
-
+	// const [data, setData] = useState([{}])
     
 	function gettingUserName (event) {
 		setuserData(event.target.value)
@@ -60,8 +64,8 @@ function Login(){
 
 	function loginFetch(){
 		// login_STATUS["stat"] = true
-		fetch("/users/login/"+userName+"/"+pW).then(
-			res => res.json()
+		axiosInstance.get("/users/login/"+userName+"/"+pW).then(
+			res => res.data
 		).then(
 			data => {
 				setData(data)

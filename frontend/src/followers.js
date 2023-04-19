@@ -1,5 +1,6 @@
-import NavBar from "./NavBar"
 import React, { useState, useEffect } from "react"
+import axiosInstance from "./helpers/axios"
+import NavBar from "./NavBar"
 import { useParams } from "react-router-dom"
 import "./css/follow.css"
 
@@ -11,8 +12,8 @@ function FollowersP() {
     const [validUser, setValidUser] = useState([{}])
 
     useEffect(() => {
-		fetch(`/users/followers/${id}`).then(
-			res => res.json()
+		axiosInstance.get(`/users/followers/${id}`).then(
+			res => res.data
 		).then(
 			data => {
 				setFData(data["Data"][id]["followers"])
