@@ -1,61 +1,99 @@
 import React, { useState } from "react"
+// import './register.css'
 
-const RegistrationPage = () => {
+function Registration10() {
   const [formData, setFormData] = useState({
-    name: "",
+    username: "",
     email: "",
     password: "",
+    confirmPassword: "",
   })
+  const [errors, setErrors] = useState({})
 
-  const handleChange = (event) => {
-    const { name, value } = event.target
+  const handleChange = (e) => {
+    const { name, value } = e.target
     setFormData({ ...formData, [name]: value })
   }
 
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    console.log("Submitted form data:", formData)
-    // You can send formData to your backend for processing here
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    if (validate()) {
+      console.log("Form submitted successfully", formData)
+      setFormData({
+        username: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      })
+    }
+  }
+
+  const validate = () => {
+    const errors = {}
+
+    if (!formData.username) errors.username = "Username is required"
+    if (!formData.email) errors.email = "Email is required"
+    if (!formData.password) errors.password = "Password is required"
+    if (!formData.confirmPassword) {
+      errors.confirmPassword = "Confirm password is required"
+    } else if (formData.password !== formData.confirmPassword) {
+      errors.confirmPassword = "Passwords do not match"
+    }
+
+    setErrors(errors)
+    return Object.keys(errors).length === 0
   }
 
   return (
-    <div className="registration">
-      <h1>Registration</h1>
+    <div className="App">
+      <h1>Registration Page</h1>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Name:</label>
         <input
           type="text"
-          id="name"
-          name="name"
-          value={formData.name}
+          name="username"
+          placeholder="Username"
+          value={formData.username}
           onChange={handleChange}
-          required
         />
+        <div className="error">{errors.username}</div>
 
-        <label htmlFor="email">Email:</label>
         <input
           type="email"
-          id="email"
           name="email"
+          placeholder="Email"
           value={formData.email}
           onChange={handleChange}
-          required
         />
+        <div className="error">{errors.email}</div>
 
-        <label htmlFor="password">Password:</label>
         <input
           type="password"
-          id="password"
           name="password"
+          placeholder="Password"
           value={formData.password}
           onChange={handleChange}
-          required
         />
+        <div className="error">{errors.password}</div>
+
+        <input
+          type="password"
+          name="confirmPassword"
+          placeholder="Confirm Password"
+          value={formData.confirmPassword}
+          onChange={handleChange}
+        />
+        <div className="error">{errors.confirmPassword}</div>
 
         <button type="submit">Register</button>
       </form>
     </div>
   )
+  // return (
+  //   <div>Hello World</div>
+  // )
 }
 
-export default RegistrationPage
+
+
+export default Registration10

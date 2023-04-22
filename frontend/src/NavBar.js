@@ -28,7 +28,7 @@ function NavBar() {
 								style={{ maxHeight: "100px" }}
 								navbarScroll
 							>
-							<Nav.Link href="/login">Login/Sign Up?</Nav.Link>
+							
 							
 								{/* <NavDropdown title="Settings" id="settingsDropdown">
 									<NavDropdown.Item href="#action4">Privacy</NavDropdown.Item>
@@ -36,6 +36,8 @@ function NavBar() {
 									<NavDropdown.Item href="#action5">Log Out</NavDropdown.Item>
 								</NavDropdown> */}
 							</Nav>
+							<Nav><Nav.Link href="/login">Login</Nav.Link></Nav>
+							
 
 							<Nav>
 								<Nav.Link href="#action7">Resources</Nav.Link>

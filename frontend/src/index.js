@@ -11,7 +11,7 @@ import FollowingP from "./following"
 import reportWebVitals from "./reportWebVitals"
 import {BrowserRouter, Route, Routes} from "react-router-dom"
 import SearchPage from "./searchPage"
-import RegistrationPage from "./registration"
+import Registration10 from "./registration"
 import Login from "./login"
 // import {login_STATUS} from "./login"
 
@@ -33,6 +33,7 @@ if(status=="false"){
       <Route path="/Coin/:id" element={<CoinP/>}/>
       <Route path="/Search/" element={<SearchPage/>}/>
       <Route path="/Search/:id" element={<SearchPage/>}/>
+      <Route path="/Registration" element={<Registration10/>}/>
     </Routes>
     </BrowserRouter>,
     document.getElementById("root")
@@ -50,6 +51,7 @@ if(status=="false"){
       <Route path="/Coin/:id" element={<CoinP/>}/>
       <Route path="/Search/" element={<SearchPage/>}/>
       <Route path="/Search/:id" element={<SearchPage/>}/>
+      <Route path="/registration" element={<register/>}/>
     </Routes>
     </BrowserRouter>,
     document.getElementById("root")
