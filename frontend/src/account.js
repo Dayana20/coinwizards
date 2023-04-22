@@ -5,20 +5,40 @@ import axiosInstance from "./helpers/axios"
 import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button"
 import Select from "react-select"
+import axios from "axios"
 
 function AccountSettings() {
   const {id="UserNameHere"} = useParams()
   const [userData, setUserData] = useState([{}])
   const [selectedOption, setSelectedOption] = useState(null)
+  const [UserPassword, setUserPassword] = useState(null)
+  const [UserEmail, setUserEmail] = useState(null)
+
 
   
   // console.log(id)
-  let inputText = (e) => {
-    console.log(e.target.value)
+  let inputTextEmail = (e) => {
+    console.log("email", e.target.value)
+    setUserEmail(e.target.value)
+  }
+
+  let inputTextPassword = (e) => {
+    console.log("password", e.target.value)
+    setUserPassword(e.target.value)
+
   }
 
   let deleteAccount = () => {
     if(confirm("You are now deleting your account ")){
+      axiosInstance.delete(`/users/remove/${id}`).then(
+        res => res.data
+      ).then(
+        data => {
+          console.log(data)
+        }            
+      ). catch((error) => {
+        console.error("Error: ", error)
+      })
       localStorage.setItem("stat","false")
       localStorage.setItem("username",null)
       // need to add axiosInstance
@@ -28,20 +48,22 @@ function AccountSettings() {
     }
   }
 
+  // show error messages
+  // need to change both password and email to work
+  // will give error message if try saving one without modifications
   let saveDets = ()=> {
     console.log("saving")
-    // axiosInstance.get(`/users/details/update/${id}`, {method: "PUT", 
-    // headers: { "Content-Type": "application/json" }, body: JSON.stringify({})}
-    // ).then(
-    //   res => res.data
-    // ).then(
-    //   data => {
-    //     // setUserData(data["Data"])
-    //     console.log("updated data", data)
-    //   }            
-    // ). catch((error) => {
-    //   console.error("Error: ", error)
-    // })
+    let det = {"new_password": UserPassword, "new_email": UserEmail}
+    axiosInstance.put(`/users/details/update/${id}`, det
+    ).then(
+      res => res.data
+    ).then(
+      data => {
+        console.log("updated data", data)
+      }            
+    ). catch((error) => {
+      console.error("Error: ", error)
+    })
   }
 
   useEffect(() => {
@@ -56,6 +78,7 @@ function AccountSettings() {
       console.error("Error: ", error)
     })
   }, [])
+
   let email = null
   let name = null
   if(Object.keys(userData).includes(id)){
@@ -84,7 +107,7 @@ function AccountSettings() {
             <Form.Control
               type="email"
               placeholder="email"
-              onChange={inputText}
+              onChange={inputTextEmail}
               className="me-2"
               aria-label="Search"
               defaultValue={email}
@@ -93,13 +116,13 @@ function AccountSettings() {
             <Form.Control
               type="password"
               placeholder="password"
-              onChange={inputText}
+              onChange={inputTextPassword}
               className="me-2"
               aria-label="Search"
             />
             
-            <Button onClick={()=>saveDets()} variant="outline-success">Search</Button>
-            <a><Button onClick={()=>deleteAccount()} variant="outline-success">Delete Account</Button></a>
+            <Button onClick={()=>saveDets()} variant="outline-success">Update</Button>
+            <Button onClick={()=>deleteAccount()} variant="outline-success">Delete Account</Button>
             </Form>
       </div>
     </>
