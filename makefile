@@ -11,6 +11,7 @@ dev_env: FORCE
 	npm install react-scripts
 	npm install -save react-router-dom
 	npm install react-bootstrap bootstrap
+	npm i axios
 
 run: FORCE
 	cd $(REACT_APP); 

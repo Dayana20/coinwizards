@@ -63,6 +63,7 @@ function NavBar() {
 								<Nav.Link href="/">Home</Nav.Link>
 								<Nav.Link href={"/Profile/"+user}>Profile</Nav.Link>
 								<NavDropdown title="Settings" id="settingsDropdown">
+									<NavDropdown.Item href={"/Account/"+user}>Account</NavDropdown.Item>
 									<NavDropdown.Item href="#action4">Privacy</NavDropdown.Item>
 									<NavDropdown.Divider />
 									<NavDropdown.Item href="/login"><button onClick={logout}>Log Out!</button></NavDropdown.Item>
@@ -70,7 +71,7 @@ function NavBar() {
 							</Nav>
 
 							<Nav>
-								<Nav.Link href="#action7">Resources</Nav.Link>
+								<Nav.Link href="/resources">Resources</Nav.Link>
 							</Nav>
 						</Navbar.Collapse>
 					</Container>

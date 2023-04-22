@@ -1,10 +1,14 @@
 import axios from "axios"
 
 // uses cloud mongodb
-const baseURL = process.env.REACT_APP_PROD_URL
+// const baseURL = process.env.REACT_APP_PROD_URL
 
 // uses local
 // const baseURL = process.env.REACT_APP_DEV_URL
+
+// checking
+const baseURL = process.env.REACT_APP_BACKEND_BASE_URL
+
 
 const axiosInstance = axios.create({
     baseURL: baseURL,
