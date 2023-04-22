@@ -63,7 +63,7 @@ function ProfileP() {
                             <div id="coinHeader">Coins Tracked</div>
                             <ul id="coinGroup" className="list-group list-group-flush">
                                 {coinData.length > 0 ? (coinData.map(coin => (
-                                    <a href={"/Coin/" + coin} class="list-group-item list-group-item-action" id="coinItem">{coin}</a>
+                                    <a key={coin} href={"/Coin/" + coin} className="list-group-item list-group-item-action" id="coinItem">{coin}</a>
                                 ))) : (
                                     <h1 id="noneHeader">None!</h1>
                                 )}
@@ -78,7 +78,7 @@ function ProfileP() {
                             <div id="followingHeader">Following</div>
                                 <ul id="followingGroup" className="list-group list-group-flush">
                                     {followingUsers.length > 0 ? (followingUsers.map(user => (
-                                        <a href={"/Profile/" + user} className="list-group-item list-group-item-action" id="followingItem">{user}</a>
+                                        <a key={user} href={"/Profile/" + user} className="list-group-item list-group-item-action" id="followingItem">{user}</a>
                                     ))
                                     ) : (
                                     <h1 id="noneHeader">Not following anyone!</h1>

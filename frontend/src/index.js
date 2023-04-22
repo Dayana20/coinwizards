@@ -55,7 +55,7 @@ if(status=="false"){
       <Route path="/Search/" element={<SearchPage/>}/>
       <Route path="/Search/:id" element={<SearchPage/>}/>
       <Route path="/Account/:id" element={<AccountSettings/>}/>
-      <Route path="/Privacy/:id" element={<div>TO IMPLEMENT</div>}/>
+      <Route path="/Privacy/:id" element={<ComingSoon/>}/>
       <Route path="/Resources/" element={<ComingSoon/>}/>
 
     </Routes>

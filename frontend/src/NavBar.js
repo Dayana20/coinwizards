@@ -38,7 +38,7 @@ function NavBar() {
 							</Nav>
 
 							<Nav>
-								<Nav.Link href="#action7">Resources</Nav.Link>
+								<Nav.Link href="/resources">Resources</Nav.Link>
 							</Nav>
 						</Navbar.Collapse>
 					</Container>
@@ -64,7 +64,7 @@ function NavBar() {
 								<Nav.Link href={"/Profile/"+user}>Profile</Nav.Link>
 								<NavDropdown title="Settings" id="settingsDropdown">
 									<NavDropdown.Item href={"/Account/"+user}>Account</NavDropdown.Item>
-									<NavDropdown.Item href="#action4">Privacy</NavDropdown.Item>
+									<NavDropdown.Item href={"/Privacy/"+user}>Privacy</NavDropdown.Item>
 									<NavDropdown.Divider />
 									<NavDropdown.Item href="/login"><button onClick={logout}>Log Out!</button></NavDropdown.Item>
 								</NavDropdown>
