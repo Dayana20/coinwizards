@@ -13,6 +13,8 @@ import {BrowserRouter, Route, Routes} from "react-router-dom"
 import SearchPage from "./searchPage"
 import Registration10 from "./registration"
 import Login from "./login"
+import ComingSoon from "./comingsoon"
+import AccountSettings from "./account"
 // import {login_STATUS} from "./login"
 
 // export var login_STATUS = false
@@ -34,6 +36,8 @@ if(status=="false"){
       <Route path="/Search/" element={<SearchPage/>}/>
       <Route path="/Search/:id" element={<SearchPage/>}/>
       <Route path="/Registration" element={<Registration10/>}/>
+      <Route path="/Resources/" element={<ComingSoon/>}/>
+      
     </Routes>
     </BrowserRouter>,
     document.getElementById("root")
@@ -51,7 +55,11 @@ if(status=="false"){
       <Route path="/Coin/:id" element={<CoinP/>}/>
       <Route path="/Search/" element={<SearchPage/>}/>
       <Route path="/Search/:id" element={<SearchPage/>}/>
-      <Route path="/registration" element={<register/>}/>
+      <Route path="/Registration" element={<Registration10/>}/>
+      <Route path="/Account/:id" element={<AccountSettings/>}/>
+      <Route path="/Privacy/:id" element={<ComingSoon/>}/>
+      <Route path="/Resources/" element={<ComingSoon/>}/>
+
     </Routes>
     </BrowserRouter>,
     document.getElementById("root")
