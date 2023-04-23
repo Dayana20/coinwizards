@@ -41,7 +41,7 @@ function CoinList(searchBarInput="") {
 						<h5>No Coins Found In List</h5>
 					): (
 						filteredCoinData.map(([item,logo]) => (
-							<div key={item} className="d-flex flex-row align-items-center justify-content-evenly" style={{width:"20rem", height:"7rem", marginLeft:"3vh"}}>
+							<div key={item} className="d-flex flex-row align-items-center" style={{width:"20rem", height:"7rem", marginLeft:"3vh"}}>
 								<img className="bg-dark rounded-circle img-thumbnail" style={{width: "5rem", height: "5rem", marginBottom:"2vw"}} src={logo}/>
 								<a className="coinListItem" href={"/Coin/"+item}><h2>{item}</h2></a>
 							</div>

@@ -54,7 +54,7 @@ function AccountSettings() {
   // need to change both password and email to work
   // will give error message if try saving one without modifications
   let saveDets = ()=> {
-    console.log("saving")
+    console.log("saving", UserPassword, UserEmail)
     let det = {"new_password": UserPassword, "new_email": UserEmail}
     axiosInstance.put(`/users/details/update/${id}`, det
     ).then(
@@ -86,8 +86,10 @@ function AccountSettings() {
   let email = null
   let name = null
   if(Object.keys(userData).includes(id)){
-    console.log(Object.keys(userData[id]["Name"]))
     email = userData[id]["Name"]["email"]
+    if(UserEmail==null){
+      setUserEmail(email)
+    }
     name = userData[id]["Name"]["name"]
   }
 
@@ -118,7 +120,7 @@ function AccountSettings() {
               onChange={inputTextEmail}
               className="me-2"
               aria-label="Search"
-              defaultValue={email}
+              defaultValue={UserEmail}
             />
             Password
             <Form.Control

@@ -11,8 +11,7 @@ function CoinP(){
     const [followingData, setFollowData] = useState([{}])
     const [message, setMessage] = useState(null)
 
-    // login not working for now
-    // temp solution - user specific user geoge
+    console.log("coin id", id)
     useEffect(() => {
 		axiosInstance.get(`/coins/details/${id}`).then(
 			res => res.data
@@ -72,13 +71,12 @@ function CoinP(){
     }
     const user = localStorage.getItem("username")
     const loggedIn = localStorage.getItem("stat")
-    // console.log(coinDatap)
+    console.log("HERE!", Object.keys(coinData), coinData["tags"])
     if(loggedIn!="false"){
         const exist = followingCoin(user,id)
         console.log(3,user, loggedIn, followingData)
 
     }
-    // followingCoin(statusLoggedIn,coinData["name"])
 
     return(
         <>
@@ -95,9 +93,10 @@ function CoinP(){
                             <h3 className="cItem">{coinData["symbol"]}</h3>
                             <h3 className="cItem">Value: {coinData["price"]}</h3>
                             <h3 className="cItem">Date Added: {coinData["dateAdded"]}</h3>
-                            {(typeof coinData["tags"] === "undefined") ? (
-                                <p>Tags</p>
+                            {(Object.keys(coinData).includes("tags")==false || coinData["tags"] ==null) ? (
+                                <p>Tags:</p>
                             ) : (
+                                // <h1>HERE</h1>
                                 <h3 className="cItem d-flex flex-column align-items-center">Tags: {Object.entries(coinData["tags"]).map(([index,elem]) => <div key={elem} className="cButton"> {elem}</div>)}</h3>
                             )}
 

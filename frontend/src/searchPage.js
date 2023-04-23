@@ -71,11 +71,12 @@ function SearchPage() {
       }
     }
 
-    console.log("coin data", Object.keys(newCoinData).includes("0"))
+    // console.log("coin data", Object.keys(newCoinData).includes("0"))
     let showCoinData = ({coin}) => {
+      console.log("In SHOW", Object.keys(newCoinData).includes("0"), word)
       if(Object.keys(newCoinData).includes("0")){
         return(
-          <div></div>
+          <h5>No Matching Coins</h5>
         )
       } else if(!Object.keys(newCoinData).includes("message")){
         return(
@@ -93,7 +94,7 @@ function SearchPage() {
         )
       }
     }
-    console.log("id",id, word, newCoinData["name"])
+    console.log(Object.keys(newCoinData), id, word, newCoinData["name"])
     return (
       <>
         <NavBar/>
@@ -120,13 +121,13 @@ function SearchPage() {
               </Form>
               </div>
               <h3>Users</h3>
-              <div className="d-flex align-items-center flex-wrap">
+              <div className="d-flex flex-wrap">
                 <UserNameList input={word}/>
               </div>
 
               <h3 style={{marginTop:"5vh"}}>Coins</h3>
-              <div className="d-flex align-items-center flex-wrap">
-                {(Object.keys(newCoinData).includes("0") && id!="")? showCoinData({ coin: findCoins(word) })
+              <div className="d-flex align-items-center flex-wrap justify-content-evenly">
+                {(Object.keys(newCoinData).includes("0") && word!="")? showCoinData({ coin: findCoins(word) })
                 : (word!=id || word!=newCoinData["name"] || id=="")? <CoinList input={word}/>
                 : showCoinData({ coin: newCoinData})
                 }
@@ -180,7 +181,7 @@ function SearchPage() {
                   <Button onClick={()=>findAll(word)} variant="outline-success">Search</Button>
                 </Form>
               </div>
-              <div className="d-flex align-items-center flex-wrap">
+              <div className="d-flex align-items-center flex-wrap justify-content-evenly">
                 {(Object.keys(newCoinData).includes("0") || word!=id)? <CoinList input={word}/> 
                 : (word!=newCoinData["name"])? <CoinList input={word}/> 
                 : showCoinData({ coin: newCoinData })

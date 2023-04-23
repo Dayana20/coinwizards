@@ -95,3 +95,14 @@ body{
 #coinPage{
     margin-top: 2vw;
 }
+
+#userItem{
+    text-decoration: none;
+    color: black;
+}
+
+#userItem:hover{
+    font-weight: bolder;
+    color:rgb(115, 200, 109);
+
+}

@@ -49,26 +49,24 @@ function Login(){
 		{(logginError==true)? <Alert key="danger" variant="danger">Check Username or Password!</Alert>
 		:<div></div>
 		}
-		<Form>
+		<Form className="d-flex flex-column align-items-center" style={{textAlign:"center", marginTop:"4rem"}}>
 			<Form.Group className="mb-3" controlId="formBasicUsername">
 				<Form.Label>Username</Form.Label>
-				<Form.Control type="username" onChange={gettingUserName} placeholder="Enter email" />
+				<Form.Control type="username" onChange={gettingUserName} placeholder="Username" />
 			</Form.Group>
 
 			<Form.Group className="mb-3" controlId="formBasicPassword">
 				<Form.Label>Password</Form.Label>
 				<Form.Control type="password" onChange={gettingPassword} placeholder="Password" />
 			</Form.Group>
-			{/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
-				<Form.Check type="checkbox" label="Check me out" />
-			</Form.Group> */}
 			<Button variant="primary" onClick={()=>loginFetch()}>
 				Submit
 			</Button>
+			<a href="/Registration">Don"t have an account? Sign up</a>
 			
 			
 		</Form>
-		<a href = "/Registration">Don"t have an account? Sign up</a>
+		{/* <a href = "/Registration">Don"t have an account? Sign up</a> */}
 		</>
 	)
 	
