@@ -2,11 +2,15 @@ import React, { useState, useEffect } from "react"
 import axiosInstance from "./helpers/axios"
 import NavBar from "./NavBar"
 import { useParams } from "react-router-dom"
+import Alert from "react-bootstrap/Alert"
+
 
 function CoinP(){
     const {id="CoinNameHere"} = useParams()
     const [coinData, setCoinData] = useState([{}])
     const [followingData, setFollowData] = useState([{}])
+    const [message, setMessage] = useState(null)
+
     // login not working for now
     // temp solution - user specific user geoge
     useEffect(() => {
@@ -26,16 +30,14 @@ function CoinP(){
             res => res.data
         ).then(
             data => {
-                // if(!Object.keys(data).includes("message")){
-                //     setFollowData(data)
-                // }
                 console.log("Following data", data)
+                setMessage("Following Coin")
             }            
         ). catch((error) => {
             console.error("Error: ", error)
         })
-        alert("You are now following "+String(coin))
-        window.location.reload()
+        // alert("You are now following "+String(coin))
+        // window.location.reload()
     }
 
     let unfollowCoin =(user,coin) =>{
@@ -43,16 +45,15 @@ function CoinP(){
             res => res.data
         ).then(
             data => {
-                // if(!Object.keys(data).includes("message")){
-                //     setFollowData(data)
-                // }
                 console.log("unfollowing data", data)
+                setMessage("Unfollowing Coin")
+
             }            
         ). catch((error) => {
             console.error("Error: ", error)
         })
-        alert("You are now unfollowing "+String(coin))
-        window.location.reload()
+        // alert("You are now unfollowing "+String(coin))
+        // window.location.reload()
     }
     
     let followingCoin =(user,coin) =>{
@@ -82,6 +83,9 @@ function CoinP(){
     return(
         <>
             <NavBar/>
+            {(message==null)? <div></div>
+            :<Alert key="danger" variant="success">{message}!</Alert>
+            }
             <div id="coinPage">
                 <div className="d-flex justify-content-around">
                     <div className="d-flex flex-column align-items-center">

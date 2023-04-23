@@ -55,7 +55,7 @@ if(status=="false"){
       <Route path="/Coin/:id" element={<CoinP/>}/>
       <Route path="/Search/" element={<SearchPage/>}/>
       <Route path="/Search/:id" element={<SearchPage/>}/>
-      <Route path="/Registration" element={<Registration10/>}/>
+      {/* <Route path="/Registration" element={<Registration10/>}/> */}
       <Route path="/Account/:id" element={<AccountSettings/>}/>
       <Route path="/Privacy/:id" element={<ComingSoon/>}/>
       <Route path="/Resources/" element={<ComingSoon/>}/>

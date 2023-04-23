@@ -6,6 +6,8 @@ import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button"
 import Select from "react-select"
 import axios from "axios"
+import Alert from "react-bootstrap/Alert"
+
 
 function AccountSettings() {
   const {id="UserNameHere"} = useParams()
@@ -13,7 +15,7 @@ function AccountSettings() {
   const [selectedOption, setSelectedOption] = useState(null)
   const [UserPassword, setUserPassword] = useState(null)
   const [UserEmail, setUserEmail] = useState(null)
-
+  const [message, setMessage] = useState(null)
 
   
   // console.log(id)
@@ -59,10 +61,12 @@ function AccountSettings() {
       res => res.data
     ).then(
       data => {
-        console.log("updated data", data)
+        setMessage(`updated account for ${id}`)
+
       }            
     ). catch((error) => {
       console.error("Error: ", error)
+      setMessage(error["response"]["data"]["message"])
     })
   }
 
@@ -90,6 +94,10 @@ function AccountSettings() {
   return (
       <>
       <NavBar/>
+      {(message==null)? <div></div>
+      :(message.includes("failed"))? <Alert key="danger" variant="danger">{message}!</Alert>
+      :<Alert key="danger" variant="success">{message}!</Alert>
+      }
       <div className="d-flex flex-column justify-content-center align-items-center" style={{height:"50vh"}}>
           <h2>Update User Settings {}</h2>
           <Form className="d-flex flex-column justify-content-center">
@@ -123,7 +131,8 @@ function AccountSettings() {
             
             <Button onClick={()=>saveDets()} variant="outline-success">Update</Button>
             <Button onClick={()=>deleteAccount()} variant="outline-success">Delete Account</Button>
-            </Form>
+          </Form>
+          
       </div>
     </>
   )
