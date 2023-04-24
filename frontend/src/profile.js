@@ -14,6 +14,7 @@ function ProfileP() {
     const [coinData, setCoinData] = useState([{}])
     const [validUser, setValidUser] = useState([{}])
     const [followingUsers, setFollowingUsers] = useState([])
+    const [followersUsers, setFollowersUsers] = useState([])
 
     useEffect(() => {
 		axiosInstance.get(`/users/details/${id}`).then(
@@ -24,6 +25,7 @@ function ProfileP() {
                 setFGData(data["Data"][id]["Name"]["Following"])
                 setCoinData(data["Data"][id]["Name"]["coins"])
                 setFollowingUsers(data["Data"][id]["Name"]["Following"])
+                setFollowersUsers(data["Data"][id]["Name"]["Followers"])
                 setValidUser(true)
                 setLoading(false)
 			}            
@@ -63,7 +65,7 @@ function ProfileP() {
                             <div id="coinHeader">Coins Tracked</div>
                             <ul id="coinGroup" className="list-group list-group-flush">
                                 {coinData.length > 0 ? (coinData.map(coin => (
-                                    <a key={coin} href={"/Coin/" + coin} className="list-group-item list-group-item-action" id="coinItem">{coin}</a>
+                                    <a href={"/Coin/" + coin} class="list-group-item list-group-item-action" id="coinItem">{coin}</a>
                                 ))) : (
                                     <h1 id="noneHeader">None!</h1>
                                 )}
@@ -71,14 +73,23 @@ function ProfileP() {
                             </ul>
                         </div>
                         <div id="postsCol">
-
+                            <div id="followingHeader">Following</div>
+                                <ul id="followingGroup" className="list-group list-group-flush">
+                                    {followersUsers.length > 0 ? (followersUsers.map(user => (
+                                        <a href={"/Profile/" + user} className="list-group-item list-group-item-action" id="followingItem">{user}</a>
+                                    ))
+                                    ) : (
+                                    <h1 id="noneHeader">No followers</h1>
+                                    )}
+                                </ul>
+                            </div>
                         </div>
 
                         <div id="placeholderCol">
                             <div id="followingHeader">Following</div>
                                 <ul id="followingGroup" className="list-group list-group-flush">
                                     {followingUsers.length > 0 ? (followingUsers.map(user => (
-                                        <a key={user} href={"/Profile/" + user} className="list-group-item list-group-item-action" id="followingItem">{user}</a>
+                                        <a href={"/Profile/" + user} className="list-group-item list-group-item-action" id="followingItem">{user}</a>
                                     ))
                                     ) : (
                                     <h1 id="noneHeader">Not following anyone!</h1>
@@ -87,10 +98,10 @@ function ProfileP() {
                             </div>
                         
                         <div id="placeholderCol2">
-
-                        </div>
+                            
                     </div>
                 </div>
+
                 ) : (
                 <div id="profilePage">
                     <NavBar/>
