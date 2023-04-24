@@ -18,7 +18,6 @@ function SearchPage() {
     const [selectedOption, setSelectedOption] = useState(null)
     const [newCoinData, setNewCoinData] = useState([{}])
 
-
     let inputText = (e) => {
       setWord(e.target.value)
     }
@@ -57,7 +56,6 @@ function SearchPage() {
     }
 
     let findCoins = (name) => {
-      console.log("In find coins function")
       if(name!=""){
         axiosInstance.put("/coins/add/"+name).then(
           res => res.data
@@ -73,12 +71,18 @@ function SearchPage() {
 
     // console.log("coin data", Object.keys(newCoinData).includes("0"))
     let showCoinData = ({coin}) => {
-      console.log("In SHOW", Object.keys(newCoinData).includes("0"), word)
-      if(Object.keys(newCoinData).includes("0")){
+      if(id!="" && word==id && Object.keys(newCoinData).includes("name")){
+        // console.log(newCoinData)
         return(
-          <h5>No Matching Coins</h5>
-        )
-      } else if(!Object.keys(newCoinData).includes("message")){
+          <div className="d-flex flex-row flex-wrap align-items-center justify-content-evenly">
+            <div className="d-flex align-items-center justify-content-center" style={{minWidth:"20vh", maxWidth:"30svh", marginLeft:"3vh",marginBottom:"1rem"}}>
+              <img className="bg-dark rounded-circle img-thumbnail" style={{width: "5rem", height: "5rem", marginBottom:"2vw"}} src={newCoinData.logo}/>
+              <a className="coinListItem" href={"/Coin/"+newCoinData.name}><h2>{newCoinData.name}</h2></a>
+            </div>
+          </div>
+          )
+      } else if(Object.keys(newCoinData).includes("name")){
+        console.log(coin)
         return(
             <div className="d-flex flex-row flex-wrap align-items-center justify-content-evenly">
               <div className="d-flex align-items-center justify-content-center" style={{minWidth:"20vh", maxWidth:"30svh", marginLeft:"3vh",marginBottom:"1rem"}}>
@@ -90,11 +94,11 @@ function SearchPage() {
       }
       else{
         return(
-          <h5>No Coins Found!</h5>
+          <div></div>
         )
       }
     }
-    console.log(Object.keys(newCoinData), id, word, newCoinData["name"])
+    // console.log("id",id, "word",word, "coin data", newCoinData)
     return (
       <>
         <NavBar/>
@@ -127,9 +131,16 @@ function SearchPage() {
 
               <h3 style={{marginTop:"5vh"}}>Coins</h3>
               <div className="d-flex align-items-center flex-wrap justify-content-evenly">
-                {(Object.keys(newCoinData).includes("0") && word!="")? showCoinData({ coin: findCoins(word) })
+                {/* {(Object.keys(newCoinData).includes("0") && word!="")? showCoinData({ coin: findCoins(word) })
                 : (word!=id || word!=newCoinData["name"] || id=="")? <CoinList input={word}/>
                 : showCoinData({ coin: newCoinData})
+                } */}
+                {(id=="" && (Object.keys(newCoinData).includes("0") || newCoinData["name"]!=word )&& word!="")? <CoinList input={word}/>
+                : (id=="" && word!="")? showCoinData({ coin: newCoinData})
+                : (id!="" && word==id && Object.keys(newCoinData).includes("0") )? showCoinData({ coin: findCoins(id)})
+                : (id!="" && newCoinData["name"]==word)? showCoinData({ coin: newCoinData})
+                : (id!="")? <CoinList input={word}/>
+                : <CoinList input={word}/>
                 }
 
               </div>
@@ -152,7 +163,7 @@ function SearchPage() {
                     defaultValue={id}
                   />
                   
-                  <Button onClick={()=>findAll(word)} variant="outline-success">Search</Button>
+                  <Button onClick={()=>findUsers(word)} variant="outline-success">Search</Button>
                 </Form>
               </div>
               <h3>Users</h3>
@@ -178,13 +189,20 @@ function SearchPage() {
                     defaultValue={id}
                   />
                   
-                  <Button onClick={()=>findAll(word)} variant="outline-success">Search</Button>
+                  <Button onClick={()=>findCoins(word)} variant="outline-success">Search</Button>
                 </Form>
               </div>
               <div className="d-flex align-items-center flex-wrap justify-content-evenly">
-                {(Object.keys(newCoinData).includes("0") || word!=id)? <CoinList input={word}/> 
+                {/* {(Object.keys(newCoinData).includes("0") || word!=id)? <CoinList input={word}/> 
                 : (word!=newCoinData["name"])? <CoinList input={word}/> 
                 : showCoinData({ coin: newCoinData })
+                } */}
+                {(id=="" && (Object.keys(newCoinData).includes("0") || newCoinData["name"]!=word )&& word!="")? <CoinList input={word}/>
+                : (id=="" && word!="")? showCoinData({ coin: newCoinData})
+                : (id!="" && word==id && Object.keys(newCoinData).includes("0") )? showCoinData({ coin: findCoins(id)})
+                : (id!="" && newCoinData["name"]==word)? showCoinData({ coin: newCoinData})
+                : (id!="")? <CoinList input={word}/>
+                : <CoinList input={word}/>
                 }
               </div>
             </div>
