@@ -6,6 +6,8 @@ import "./css/profile.css"
 import blank_profile from "./assets/blank_profile.jpg"
 import Alert from "react-bootstrap/Alert"
 
+import moment from "moment"
+import { Button } from "react-bootstrap"
 
 function ProfileP() {
     const {id="UserNameHere"} = useParams()
@@ -170,62 +172,57 @@ function ProfileP() {
                                 <br/>
                                 <br/>
                                 <br/>
-                                {loggedIn && id==loggedUser ? (<div>New Post</div>) : <div></div>}
+                                {loggedIn && id==loggedUser ? (
+                                    <Button variant="secondary" title="Coming Soon">
+                                        New Post (Coming Soon)
+                                    </Button>
+                                ) : null}
                             </div> 
                         </div>
-                        <div id="coinsDiv">
+                        <div id="coinsDiv" className="border-bottom">
                             <div id="coinHeader">Coins Tracked</div>
                             <ul id="coinGroup" className="list-group list-group-flush">
                                 {coinData.length > 0 ? (coinData.map(coin => (
                                     <a key={coin} href={"/Coin/" + coin} className="list-group-item list-group-item-action" id="coinItem">{coin}</a>
                                 ))) : (
-                                    <h1 id="noneHeader">None!</h1>
+                                    <div id="noneHeader">No coins tracked!</div>
                                 )}
-                                
                             </ul>
                         </div>
                         <div id="postsCol">
-                        <div id="coinHeader">Posts</div>
-                        <ul id="postsGroup" className="list-group list-group-flush overflow-auto">
-                                {postData.length > 0 ? (postData.reverse().map(u_post => (
-                                    <div key={u_post.title} class="list-group-item list-group-item-action rounded-bottom" id="postItem">
-                                        <span>{u_post.title}</span>
-                                        <br/>
-                                        <span>
-                                            {u_post.tags.length > 0 ? (u_post.tags.map(tag => (
-                                                <a>"{tag}"&nbsp;</a>
-                                            ))): <></>}
-                                        </span>
-                                        <br/>
-                                        <span>{new Date(u_post.timestamp).toLocaleString("en-us").replace(",","")}</span>
-                                        <br/>
-                                        <br/>
-                                        <p>
-                                            {u_post.content}
-                                        </p>
-                                    </div>
-                                ))) : (
-                                    <h1 id="noneHeader">None!</h1>
-                                )}
-                                
-                            </ul>
-                        </div>
-
-                        <div id="placeholderCol">
-                            <div id="followingHeader">Following</div>
-                                <ul id="followingGroup" className="list-group list-group-flush">
-                                    {followingUsers.length > 0 ? (followingUsers.map(user => (
-                                        <a key={user} href={"/Profile/" + user} className="list-group-item list-group-item-action" id="followingItem">{user}</a>
-                                    ))
-                                    ) : (
-                                    <h1 id="noneHeader">Not following anyone!</h1>
+                            <div id="coinHeader">Posts</div>
+                            <ul id="postsGroup" className="list-group list-group-flush overflow-auto">
+                                    {postData.length > 0 ? (postData.reverse().map(u_post => (
+                                        <div key={u_post.title} class="list-group-item list-group-item-action rounded-bottom" id="postItem">
+                                            <span id="postTitle">{u_post.title}</span>
+                                            <br/>
+                                            {u_post.tags.length > 0 ? (
+                                                <>
+                                                    <span id="postTags">
+                                                        {(u_post.tags.map(tag => (
+                                                            <a>#{tag}&nbsp;</a>
+                                                        )))}
+                                                    </span>
+                                                    <br/>
+                                                </>
+                                            ) : null}
+                                            <span id="postTimestamp" title={moment.utc(u_post.timestamp).format()}>{moment(u_post.timestamp + "Z").fromNow()}</span>
+                                            <br/>
+                                            <br/>
+                                            <p>
+                                                {u_post.content}
+                                            </p>
+                                        </div>
+                                    ))) : (
+                                        <h1 id="noneHeader">None!</h1>
                                     )}
+                                    
                                 </ul>
-                            </div>
                         </div>
-                        
-                        <div id="placeholderCol2">
-                            
+                        <div id="placeholderCol">
+                            <div id="coinHeader">Activites</div>
+                            <h1 id="noneHeader">Coming Soon</h1>
+                        </div>
                     </div>
                 </div>
                 ) : (

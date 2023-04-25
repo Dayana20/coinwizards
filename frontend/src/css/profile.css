@@ -2,15 +2,12 @@
     padding: 0;
 }
 
-.followerPopup {
-    background-color: red;
-    position: fixed;
-    display: flex;
-    justify-content: center;
-    z-index: 5;
-}
-
 #noneHeader {
+    background-color: rgb(28, 28, 32);
+    padding-top: 25%;
+    justify-content: center;
+    display:flex;
+    align-items:center;
     text-align: center;
     color:aliceblue;
     font-size: 1.5em;
@@ -30,7 +27,7 @@
 }
 
 #pictureCol {
-    background-color: rgb(28, 28, 32);
+    background-color: rgb(24, 24, 27);
     text-align:center;
     float: left;
     min-height:100%;
@@ -71,16 +68,18 @@
 
 #coinsDiv {
     background-color: rgb(28, 28, 32);
-    width: 20rem;
+    width: 30rem;
     height: 24rem;
     position:absolute;
     left: 20rem;
+    border-color: aquamarine;
+    border-bottom: 1px;
 }
 
 #coinHeader {
     background-color: rgb(28, 45, 68);
     text-align: center;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     color:aliceblue;
 }
 
@@ -104,7 +103,6 @@
     text-align: left;
     color:aliceblue;
     background-color: rgb(28, 28, 32);
-    border-top: 2px solid #0091b5;
 }
 
 #coinItem {
@@ -128,7 +126,15 @@
     color:white;
     background-color: rgb(28, 28, 32);
     word-wrap: break-word;
-    max-width:20rem;
+    max-width:40rem;
+}
+
+#postItem:first-child {
+    border-top: 0px;
+}
+
+#postItem:last-child {
+    border-bottom: 2px solid #0091b5;
 }
 
 #postItem:hover {
@@ -140,31 +146,23 @@
     font-weight: bolder;
 }
 
-#placeholderCol2 {
-    background-color: rgb(37, 53, 90); 
-    width: 30rem;
-    height: 378px;
-    left: 40rem;
-    position:absolute;
-}
-
 #postsCol {
-    background-color: black;
+    background-color: rgb(37, 53, 90);
     min-height:93%;
     bottom: 0;
-    min-width: 20rem;
+    min-width: 40rem;
     position: absolute;
     z-index: -1;
     right: 0%;
 }
 
 #placeholderCol {
-    background-color: rgb(37, 53, 90); 
+    background-color: rgb(28, 28, 32); 
     position: absolute;
     left: 20rem;
     bottom: 0;
     height: 356px;
-    width: 50rem;
+    width: 30rem;
 }
 
 #followRef {
@@ -175,4 +173,19 @@
 #followRef:hover {
     color:rgb(90, 119, 193);
     font-weight: bolder;
+}
+
+#postTimestamp {
+    font-size:smaller;
+    color: rgb(26, 179, 240);
+}
+
+#postTags {
+    font-size:medium;
+    color:blueviolet;
+}
+
+#postTitle {
+    font-size: larger;
+    font-weight: bold;
 }

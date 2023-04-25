@@ -62,7 +62,7 @@ function Login(){
 			<Button variant="primary" onClick={()=>loginFetch()}>
 				Submit
 			</Button>
-			<a href="/Registration">Don"t have an account? Sign up</a>
+			<a href="/Registration">Don't have an account? Sign up</a>
 			
 			
 		</Form>
