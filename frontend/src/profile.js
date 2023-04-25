@@ -182,7 +182,7 @@ function ProfileP() {
                             {(loggedUser!=id && loggedIn!="false" && followingStatus == false)? <button onClick={()=>UserFollow(loggedUser,id)}> Follow </button>
                             :(loggedUser!=id && loggedIn!="false" && followingStatus == true) ? <button onClick={()=>unfollowUser(loggedUser,id)}> Unfollow </button>
                             : (
-                                <div>H</div>
+                                <div></div>
                                 // <button onClick={()=>CoinFollow(user,coinData["name"])}> Follow </button>
                             )}
                             <div id="followHeader">
