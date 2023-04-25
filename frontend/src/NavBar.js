@@ -8,14 +8,14 @@ import "bootstrap/dist/css/bootstrap.css"
 
 // console.log("here! nav!", login_STATUS)
 function logout(){
-    localStorage.setItem("stat", null)
+    localStorage.setItem("stat","false")
     localStorage.setItem("username",null)
 }
 
 // used https://react-bootstrap.github.io/components/navbar/ as foundation
 function NavBar() {
 	let status = localStorage.getItem("stat")
-	if (status == null){
+	if (status=="false"){
 		return (
 			<div id="homestyle">
 				<Navbar bg="light" expand="lg">
