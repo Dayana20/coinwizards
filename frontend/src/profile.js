@@ -232,7 +232,7 @@ function ProfileP() {
                                                     <br/>
                                                 </>
                                             ) : null}
-                                            <span id="postTimestamp" title={moment.utc(u_post.timestamp).format()}>{moment(u_post.timestamp).fromNow()}</span>
+                                            <span id="postTimestamp" title={moment.utc(u_post.timestamp).format()}>{moment(u_post.timestamp + "Z").fromNow()}</span>
                                             <br/>
                                             <br/>
                                             <p>
