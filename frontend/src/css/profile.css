@@ -70,7 +70,7 @@
 }
 
 #coinsDiv {
-    background-color: rgb(24, 48, 82);
+    background-color: rgb(28, 28, 32);
     width: 20rem;
     height: 24rem;
     position:absolute;
@@ -100,15 +100,43 @@
     scrollbar-width: auto;
 }
 
+#coinItem:first-child {
+    text-align: left;
+    color:aliceblue;
+    background-color: rgb(28, 28, 32);
+    border-top: 2px solid #0091b5;
+}
+
 #coinItem {
     text-align: left;
     color:aliceblue;
-    background-color: rgb(37, 53, 90);
+    background-color: rgb(28, 28, 32);
+    border-bottom: 2px solid #0091b5;
+}
+
+#coinItem:hover {
+    box-shadow: inset 0em 0em 0em 10em rgba(0, 0, 0, 0.25);
+}
+
+#postsGroup {
+    max-height:43.5rem;
+}
+
+#postItem {
+    border-top: 2px solid #0091b5;
+    text-align: left;
+    color:white;
+    background-color: rgb(28, 28, 32);
+    word-wrap: break-word;
+    max-width:20rem;
+}
+
+#postItem:hover {
+    box-shadow: inset 0em 0em 0em 10em rgba(0, 0, 0, 0.25);
 }
 
 #coinItem:hover{
     text-decoration: none;
-    color:rgb(90, 119, 193);
     font-weight: bolder;
 }
 
@@ -121,7 +149,7 @@
 }
 
 #postsCol {
-    background-color: rgb(37, 53, 90);
+    background-color: black;
     min-height:93%;
     bottom: 0;
     min-width: 20rem;
