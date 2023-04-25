@@ -50,6 +50,7 @@ if(status=="false"){
     <Routes>
       <Route path="/" element={<Home/>}/>
       <Route path="/Home" element={<Home/>}/>
+      <Route path="/login/" element={<Login/>}/>
       <Route path="/Profile/:id" element={<ProfileP/>}/>
       <Route path="/Profile/:id/followers" element={<FollowersP/>}/>
       <Route path="/Profile/:id/following" element={<FollowingP/>}/>

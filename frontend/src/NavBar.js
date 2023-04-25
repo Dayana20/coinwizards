@@ -15,7 +15,8 @@ function logout(){
 // used https://react-bootstrap.github.io/components/navbar/ as foundation
 function NavBar() {
 	let status = localStorage.getItem("stat")
-	if (status=="false"){
+	console.log("status is", status)
+	if (status == "null" || status=="false"){
 		return (
 			<div id="homestyle">
 				<Navbar bg="light" expand="lg">

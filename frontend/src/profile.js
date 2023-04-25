@@ -218,9 +218,14 @@ function ProfileP() {
                                     {postData.length > 0 ? (postData.map(u_post => (
                                         <div key={u_post.title} class="list-group-item list-group-item-action rounded-bottom" id="postItem">
                                             <span id="postTitle">{u_post.title}</span>
-                                            <Button id="deleteButton" className="btn btn-secondary" onClick={() => handleClickDelete(u_post.post_id)}>
-                                                <span>&times;</span>
-                                            </Button>
+                                            { loggedIn && id==loggedUser ? (
+                                                <>
+                                                <Button id="deleteButton" className="btn btn-secondary" onClick={() => handleClickDelete(u_post.post_id)}>
+                                                    <span>&times;</span>
+                                                </Button>
+                                                </>
+                                            ) : null
+                                            }
                                             <br/>
                                             {u_post.tags.length > 0 ? (
                                                 <>
