@@ -15,6 +15,12 @@ function ProfileP() {
     const [followingData, setFGData] = useState([{}])
     const [coinData, setCoinData] = useState([{}])
     const [validUser, setValidUser] = useState([{}])
+    const [postData, setPostData] = useState([{}])
+
+    const loggedIn = localStorage.getItem("stat")
+    const loggedUser = localStorage.getItem("username")
+    // const user = localStorage.getItem("username")
+
     const [followingUsers, setFollowingUsers] = useState([])
     const [followersUsers, setFollowersUsers] = useState([])
     const [followingStatus, setFollowStatus] = useState(null)
@@ -28,6 +34,7 @@ function ProfileP() {
 			res => res.data
 		).then(
 			data => {
+                console.log(data["Data"][id]["Name"]["posts"])
 				setFData(data["Data"][id]["Name"]["Followers"])
                 setFGData(data["Data"][id]["Name"]["Following"])
                 setCoinData(data["Data"][id]["Name"]["coins"])
@@ -35,8 +42,11 @@ function ProfileP() {
                 console.log(data["Data"][id]["Name"]["Followers"], data["Data"][id]["Name"]["Followers"].length)
                 setfollowerLen(data["Data"][id]["Name"]["Followers"].length)
                 setFollowersUsers(data["Data"][id]["Name"]["Followers"])
+                setPostData(data["Data"][id]["Name"]["posts"])
                 setValidUser(true)
                 setLoading(false)
+                console.log(coinData)
+                console.log(followerData)
 			}            
 		). catch((error) => {
 			setValidUser(false)
@@ -101,7 +111,7 @@ function ProfileP() {
 
     let followingUserStatus =(user1,user2) =>{
         // checking to see if account follows user on page
-        axiosInstance.get("/users/followings/"+user).then(
+        axiosInstance.get("/users/followings/"+loggedUser).then(
             res => res.data
         ).then(
             data => {
@@ -121,12 +131,12 @@ function ProfileP() {
             console.error("Error: ", error)
         })
     }
-    const user = localStorage.getItem("username")
-    const loggedIn = localStorage.getItem("stat")
+
     if(followingStatus==null && loggedIn!="false"){
-        const exist = followingUserStatus(user,id)
+        const exist = followingUserStatus(loggedUser,id)
     }
     console.log("stat", followerData)
+ 
     return (
         <>
             {loading ? (
@@ -144,8 +154,8 @@ function ProfileP() {
                         <div id="pictureCol">
                             <img id="pictureCircle" className="rounded-circle" src={blank_profile}/>
                             <div id="nameHeader">{id}</div> 
-                            {(user!=id && loggedIn!="false" && followingStatus == false)? <button onClick={()=>UserFollow(user,id)}> Follow </button>
-                            :(user!=id && loggedIn!="false" && followingStatus == true) ? <button onClick={()=>unfollowUser(user,id)}> Unfollow </button>
+                            {(loggedUser!=id && loggedIn!="false" && followingStatus == false)? <button onClick={()=>UserFollow(loggedUser,id)}> Follow </button>
+                            :(loggedUser!=id && loggedIn!="false" && followingStatus == true) ? <button onClick={()=>unfollowUser(loggedUser,id)}> Unfollow </button>
                             : (
                                 <div>H</div>
                                 // <button onClick={()=>CoinFollow(user,coinData["name"])}> Follow </button>
@@ -157,13 +167,17 @@ function ProfileP() {
                                 {followerLen} <a id="followRef" href={"/Profile/"+id+"/followers"}>Followers</a>
                                 <br/>
                                 {followingData.length} <a id="followRef" href={"/Profile/"+id+"/following"}>Following</a>
+                                <br/>
+                                <br/>
+                                <br/>
+                                {loggedIn && id==loggedUser ? (<div>New Post</div>) : <div></div>}
                             </div> 
                         </div>
                         <div id="coinsDiv">
                             <div id="coinHeader">Coins Tracked</div>
                             <ul id="coinGroup" className="list-group list-group-flush">
                                 {coinData.length > 0 ? (coinData.map(coin => (
-                                    <a key={coin} href={"/Coin/" + coin} class="list-group-item list-group-item-action" id="coinItem">{coin}</a>
+                                    <a key={coin} href={"/Coin/" + coin} className="list-group-item list-group-item-action" id="coinItem">{coin}</a>
                                 ))) : (
                                     <h1 id="noneHeader">None!</h1>
                                 )}
@@ -171,16 +185,30 @@ function ProfileP() {
                             </ul>
                         </div>
                         <div id="postsCol">
-                            <div id="followingHeader">Following</div>
-                                <ul id="followingGroup" className="list-group list-group-flush">
-                                    {followersUsers.length > 0 ? (followersUsers.map(user => (
-                                        <a key={user} href={"/Profile/" + user} className="list-group-item list-group-item-action" id="followingItem">{user}</a>
-                                    ))
-                                    ) : (
-                                    <h1 id="noneHeader">No followers</h1>
-                                    )}
-                                </ul>
-                            </div>
+                        <div id="coinHeader">Posts</div>
+                        <ul id="postsGroup" className="list-group list-group-flush overflow-auto">
+                                {postData.length > 0 ? (postData.reverse().map(u_post => (
+                                    <div key={u_post.title} class="list-group-item list-group-item-action rounded-bottom" id="postItem">
+                                        <span>{u_post.title}</span>
+                                        <br/>
+                                        <span>
+                                            {u_post.tags.length > 0 ? (u_post.tags.map(tag => (
+                                                <a>"{tag}"&nbsp;</a>
+                                            ))): <></>}
+                                        </span>
+                                        <br/>
+                                        <span>{new Date(u_post.timestamp).toLocaleString("en-us").replace(",","")}</span>
+                                        <br/>
+                                        <br/>
+                                        <p>
+                                            {u_post.content}
+                                        </p>
+                                    </div>
+                                ))) : (
+                                    <h1 id="noneHeader">None!</h1>
+                                )}
+                                
+                            </ul>
                         </div>
 
                         <div id="placeholderCol">
@@ -194,6 +222,7 @@ function ProfileP() {
                                     )}
                                 </ul>
                             </div>
+                        </div>
                         
                         <div id="placeholderCol2">
                             
@@ -208,41 +237,6 @@ function ProfileP() {
                     </div>
                 )}
         </>
-
-        //     <div className="card dflex"
-        //     style={{maxHeight: "20rem", maxWidth: "40rem",
-        //             marginTop: "-10rem", alignItems: "center",
-        //             marginLeft: "25rem", height:"15rem",
-        //             justifyContent: "center", display: "flex", textAlign: "center"}}>
-        //         <div className="card-body dflex text-align-center"  style={{width : "15rem"}}>
-        //             <h6><u>FOLLOWERS ({followerData.length})</u></h6>
-        //             <p className="text-align-center"> 
-        //                 {followerData.map(e => typeof e == "string"?<div>{e}</div> : "")}
-        //             </p>
-        //             <h6><u>FOLLOWING ({followingData.length})</u></h6>
-        //             <p className="text-align-center">
-        //                 {followingData.map(e => typeof e == "string"?<div>{e}</div> : "")}
-        //             </p>
-        //             <h6><u>COINS</u></h6>
-        //             <p className="text-align-center">
-        //                 {coinData.map(e => typeof e == "string"?<div>{e}</div> : "")}
-        //             </p>
-        //         </div>
-        //     </div>
-
-        //     <div className="card dflex"
-        //     style={{maxHeight: "10rem", maxWidth: "40rem",
-        //             marginTop: "10rem", alignItems: "center",
-        //             marginLeft: "25rem", height:"10rem",
-        //             justifyContent: "center", display: "flex", textAlign: "center"}}>
-        //         <div className="card-body dflex text-align-center"  style={{width : "15rem"}}>
-        //             <p className="text-align-center">No posts to show!</p>
-        //         </div>
-        //     </div>
-
-
-        // </>
-
     )
 }
 
