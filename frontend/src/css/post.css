@@ -1,0 +1,35 @@
+
+#title {
+    width:50rem;
+}
+
+#username {
+    background-color: rgb(170, 175, 180);
+}
+
+#usernameLabel, #tagLabel, #contentLabel {
+    margin-top:1%;
+}
+
+.input-tags:focus {
+    outline: 0;
+}
+
+[data-testid="tag-element"] {
+    font-size:small;
+}
+
+#postTags {
+    color: black;
+}
+
+.buttonWrapper {
+    text-align: center;
+    align-items: center;
+}
+
+#postButton {
+    display:grid;
+    margin-top: 5rem;
+    margin-left: 45%;
+}

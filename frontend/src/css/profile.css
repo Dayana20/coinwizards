@@ -2,8 +2,13 @@
     padding: 0;
 }
 
-#noneHeader {
+body.profile-body {
     background-color: rgb(28, 28, 32);
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#noneHeader {
+    background-color: rgb(37, 53, 90);
     padding-top: 25%;
     justify-content: center;
     display:flex;
@@ -69,7 +74,7 @@
 #coinsDiv {
     background-color: rgb(28, 28, 32);
     width: 30rem;
-    height: 24rem;
+    z-index: -1;
     position:absolute;
     left: 20rem;
     border-color: aquamarine;
@@ -84,9 +89,10 @@
 }
 
 #coinGroup {
-    max-height: 20rem;
+    max-height: 100%;
     overflow-y:auto;
     position: relative;
+    display:flex;
     background-color: rgb(37, 53, 90);
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -124,7 +130,7 @@
     border-top: 2px solid #0091b5;
     text-align: left;
     color:white;
-    background-color: rgb(28, 28, 32);
+    background-color: rgb(32, 30, 51);
     word-wrap: break-word;
     max-width:40rem;
 }
@@ -180,7 +186,7 @@
     color: rgb(26, 179, 240);
 }
 
-#postTags {
+#profilePostTags {
     font-size:medium;
     color:blueviolet;
 }
@@ -188,4 +194,15 @@
 #postTitle {
     font-size: larger;
     font-weight: bold;
+}
+
+#deleteButton {
+    display: flex;
+    position:absolute;
+    margin-bottom:90%;
+    margin-left: 90%;
+}
+
+#deleteButton:hover {
+    background-color: rgb(255, 70, 70, 40);
 }

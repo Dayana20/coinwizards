@@ -8,6 +8,7 @@ import ProfileP from "./profile"
 import CoinP from "./coin"
 import FollowersP from "./followers"
 import FollowingP from "./following"
+import NewPost from "./NewPost"
 import reportWebVitals from "./reportWebVitals"
 import {BrowserRouter, Route, Routes} from "react-router-dom"
 import SearchPage from "./searchPage"
@@ -28,6 +29,7 @@ if(status=="false"){
       <Route path="/Home" element={<Home/>}/>
       <Route path="/Profile/" element={<ProfileP/>}/>
       <Route path="/login/" element={<Login/>}/>
+      <Route path="/Profile/post" element={<NewPost/>}/>
       <Route path="/Profile/:id" element={<ProfileP/>}/>
       <Route path="/Profile/:id/followers" element={<FollowersP/>}/>
       <Route path="/Profile/:id/following" element={<FollowingP/>}/>
@@ -51,6 +53,7 @@ if(status=="false"){
       <Route path="/Profile/:id" element={<ProfileP/>}/>
       <Route path="/Profile/:id/followers" element={<FollowersP/>}/>
       <Route path="/Profile/:id/following" element={<FollowingP/>}/>
+      <Route path="/Profile/post" element={<NewPost/>}/>
       <Route path="/Coin/" element={<CoinP/>}/>
       <Route path="/Coin/:id" element={<CoinP/>}/>
       <Route path="/Search/" element={<SearchPage/>}/>
