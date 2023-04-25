@@ -80,7 +80,7 @@ function ProfileP() {
         ).then(
             data => {
                 console.log("Following data", data)
-                setMessage("Following User")
+                setMessage("Followed " + user2)
                 if(!Object.keys(data).includes("message")){
                     setFollowStatus(true)
                     setfollowerLen(followerLen+1)
@@ -99,7 +99,7 @@ function ProfileP() {
         ).then(
             data => {
                 // console.log("Following data", data)
-                setMessage("Following User")
+                setMessage("Unfollowed " + user2)
                 if(!Object.keys(data).includes("message")){
                     setFollowStatus(false)
                     setfollowerLen(followerLen-1)
