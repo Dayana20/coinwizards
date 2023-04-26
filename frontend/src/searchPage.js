@@ -8,6 +8,7 @@ import Select from "react-select"
 import UserNameList from "./searchList"
 import { useParams } from "react-router-dom"
 import CoinList from "./coinList"
+import moment from "moment"
 
 
 function SearchPage() {
@@ -17,6 +18,8 @@ function SearchPage() {
     const [userData, setUserData] = useState([{}])
     const [selectedOption, setSelectedOption] = useState(null)
     const [newCoinData, setNewCoinData] = useState([{}])
+    const [posts, setPosts] = useState([{}])
+    
 
     let inputText = (e) => {
       setWord(e.target.value)
@@ -69,6 +72,28 @@ function SearchPage() {
       }
     }
 
+    let findPosts = (term) =>{
+      axiosInstance.get("/users/posts/list/"+term).then(
+        res => res.data
+      ).then(
+        data => {
+                if(Object.keys(data).includes("Data")){
+                    setPosts(data["Data"])
+                }
+                // console.log(data)
+        }            
+      ). catch((error) => {
+        console.error("Error: ", error)
+      })
+    }
+
+    if(Object.keys(posts).includes("0")){
+      findPosts(id)
+    }
+    if(Object.keys(newCoinData).includes("0") && id!=""){
+      findCoins(id)
+    }
+
     // console.log("coin data", Object.keys(newCoinData).includes("0"))
     let showCoinData = ({coin}) => {
       if(id!="" && word==id && Object.keys(newCoinData).includes("name")){
@@ -94,7 +119,7 @@ function SearchPage() {
       }
       else{
         return(
-          <div></div>
+          <h3>No Coins!</h3>
         )
       }
     }
@@ -125,7 +150,7 @@ function SearchPage() {
               </Form>
               </div>
               <h3>Users</h3>
-              <div className="d-flex flex-wrap">
+              <div className="d-flex flex-wrap align-items-center justify-content-evenly">
                 <UserNameList input={word}/>
               </div>
 
@@ -137,7 +162,7 @@ function SearchPage() {
                 } */}
                 {(id=="" && (Object.keys(newCoinData).includes("0") || newCoinData["name"]!=word )&& word!="")? <CoinList input={word}/>
                 : (id=="" && word!="")? showCoinData({ coin: newCoinData})
-                : (id!="" && word==id && Object.keys(newCoinData).includes("0") )? showCoinData({ coin: findCoins(id)})
+                // : (id!="" && word==id && Object.keys(newCoinData).includes("0") )? showCoinData({ coin: findCoins(id)})
                 : (id!="" && newCoinData["name"]==word)? showCoinData({ coin: newCoinData})
                 : (id!="")? <CoinList input={word}/>
                 : <CoinList input={word}/>
@@ -199,7 +224,7 @@ function SearchPage() {
                 } */}
                 {(id=="" && (Object.keys(newCoinData).includes("0") || newCoinData["name"]!=word )&& word!="")? <CoinList input={word}/>
                 : (id=="" && word!="")? showCoinData({ coin: newCoinData})
-                : (id!="" && word==id && Object.keys(newCoinData).includes("0") )? showCoinData({ coin: findCoins(id)})
+                // : (id!="" && word==id && Object.keys(newCoinData).includes("0") )? showCoinData({ coin: findCoins(id)})
                 : (id!="" && newCoinData["name"]==word)? showCoinData({ coin: newCoinData})
                 : (id!="")? <CoinList input={word}/>
                 : <CoinList input={word}/>
@@ -216,17 +241,46 @@ function SearchPage() {
                   />
                   <Form.Control
                     type="search"
-                    placeholder="Search For Coin"
+                    placeholder="Search For Post"
                     onChange={inputText}
                     className="me-2"
                     aria-label="Search"
                     defaultValue={id}
                   />
                   
-                  <Button onClick={()=>findAll(word)} variant="outline-success">Search</Button>
+                  <Button onClick={()=>findPosts(word)} variant="outline-success">Search</Button>
                 </Form>
               </div>
-              Coming Soon
+              <h3>Posts</h3>
+              <div>
+                <ul className="list-group list-group-flush overflow-auto">
+                        {posts["posts"].length>0? (posts["posts"].map(u_post => (
+                            <div key={u_post.title} className="list-group-item list-group-item-action rounded-bottom">
+                                <span >{u_post.title}</span>
+                                <br/>
+                                {u_post.tags.length > 0 ? (
+                                    <>
+                                        <span>
+                                            {(u_post.tags.map(tag => (
+                                                <a>#{tag}&nbsp;</a>
+                                            )))}
+                                        </span>
+                                        <br/>
+                                    </>
+                                ) : null}
+                                <span title={moment.utc(u_post.timestamp).format()}>{moment(u_post.timestamp + "Z").fromNow()}</span>
+                                <br/>
+                                <br/>
+                                <p>{u_post.content}</p>
+                            </div>
+                        )))
+                        :(
+                            <h4>No Posts</h4>
+                        )}
+                        
+                    </ul>
+            </div>
+              {/* <PostList input={word}/> */}
               </div>
             }
 

@@ -38,7 +38,7 @@ function CoinList(searchBarInput="") {
 			return (
 				<>
 					{(filteredCoinData.length==0)?(
-						<h5>No Coins Found In List</h5>
+						<h5>No Coins!</h5>
 					): (
 						filteredCoinData.map(([item,logo]) => (
 							<div key={item} className="d-flex flex-row align-items-center" style={{width:"20rem", height:"7rem", marginLeft:"3vh"}}>
@@ -50,7 +50,7 @@ function CoinList(searchBarInput="") {
 				</>
 				)
 		} else{
-			return (<div>NO COINS!</div>)
+			return (<div>No Coins!</div>)
 		}	
 
 	} else{
