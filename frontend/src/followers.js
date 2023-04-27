@@ -40,7 +40,7 @@ function FollowersP() {
                     <div id="pageTemp" className="container-fluid">
                         <h1 id="headerTemp">{id + "'s Followers"}</h1>
                         <p id="listTemp" className="text-align-center"> 
-                            {followerData.map(e => typeof e == "string"?<a id="itemTemp" href={"/Profile/"+e}>{e}</a> : "")}
+                            {followerData.map(e => typeof e == "string"?<><a id="itemTemp" href={"/Profile/"+e}>{e}</a><br/></> : "")}
                         </p>
                     </div>
                 </div>

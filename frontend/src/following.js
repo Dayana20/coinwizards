@@ -40,7 +40,7 @@ function FollowingP() {
                     <div id="pageTemp" className="container-fluid">
                         <h1 id="headerTemp">{id + "'s Followings"}</h1>
                         <p id="listTemp" className="text-align-center"> 
-                            {followingData.map(e => typeof e == "string"?<a id="itemTemp" href={"/Profile/"+e}>{e}</a> : "")}
+                            {followingData.map(e => typeof e == "string"?<><a id="itemTemp" href={"/Profile/"+e}>{e}</a><br/></> : "")}
                         </p>
                     </div>
                 </div>
