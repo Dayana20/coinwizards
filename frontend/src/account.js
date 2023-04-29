@@ -61,7 +61,7 @@ function AccountSettings() {
       res => res.data
     ).then(
       data => {
-        setMessage(`updated account for ${id}`)
+        setMessage(data["message"]+` for ${id}`)
 
       }            
     ). catch((error) => {
@@ -116,7 +116,7 @@ function AccountSettings() {
             Email:
             <Form.Control
               type="email"
-              placeholder="email"
+              placeholder="Current/New Email"
               onChange={inputTextEmail}
               className="me-2"
               aria-label="Search"
@@ -125,7 +125,7 @@ function AccountSettings() {
             Password
             <Form.Control
               type="password"
-              placeholder="password"
+              placeholder="Current/New Password"
               onChange={inputTextPassword}
               className="me-2"
               aria-label="Search"
