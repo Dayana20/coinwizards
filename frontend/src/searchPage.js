@@ -87,6 +87,10 @@ function SearchPage() {
       })
     }
 
+    let handleNavClick = (path) => {
+      window.location.href=path
+    }
+
     if(Object.keys(posts).includes("0")){
       findPosts(id)
     }
@@ -255,7 +259,7 @@ function SearchPage() {
               <div>
                 <ul className="list-group list-group-flush overflow-auto">
                         {posts["posts"].length>0? (posts["posts"].map(u_post => (
-                            <div key={u_post.title} className="list-group-item list-group-item-action rounded-bottom">
+                            <div onClick={() => handleNavClick("/Profile/" + u_post.name)} key={u_post.title} className="list-group-item list-group-item-action rounded-bottom">
                                 <span >{u_post.title}</span>
                                 <br/>
                                 {u_post.tags.length > 0 ? (
@@ -269,6 +273,9 @@ function SearchPage() {
                                     </>
                                 ) : null}
                                 <span title={moment.utc(u_post.timestamp).format()}>{moment(u_post.timestamp + "Z").fromNow()}</span>
+                                <br/>
+                                <br/>
+                                <span>Posted by {u_post.name}</span>
                                 <br/>
                                 <br/>
                                 <p>{u_post.content}</p>
