@@ -1,99 +1,82 @@
-import React, { useState } from "react"
-// import './register.css'
+import React, { useState, useEffect} from "react"
+import Alert from "react-bootstrap/Alert"
+import Form from "react-bootstrap/Form"
+import Button from "react-bootstrap/Button"
+import NavBar from "./NavBar"
+import axiosInstance from "./helpers/axios"
 
-function Registration10() {
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  })
-  const [errors, setErrors] = useState({})
+function Registration(){
+    const [loginData, setData] = useState([{}])
+    const [userName, setuserData] = useState(null)
+    const [email, setEmail] = useState(null)
+    const [pW, setpwData] = useState(null)
+    const [confpw, setConfPw] = useState(null)
+    const [registerError, setRegisterError] = useState(null)
+    const [registerSuccess, setRegisterSuccess] = useState(null)
+    const [alertMsg, setAlertMsg] = useState(null)
 
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData({ ...formData, [name]: value })
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-
-    if (validate()) {
-      console.log("Form submitted successfully", formData)
-      setFormData({
-        username: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-      })
+    function gettingUserName (event) {
+        setuserData(event.target.value)
     }
-  }
-
-  const validate = () => {
-    const errors = {}
-
-    if (!formData.username) errors.username = "Username is required"
-    if (!formData.email) errors.email = "Email is required"
-    if (!formData.password) errors.password = "Password is required"
-    if (!formData.confirmPassword) {
-      errors.confirmPassword = "Confirm password is required"
-    } else if (formData.password !== formData.confirmPassword) {
-      errors.confirmPassword = "Passwords do not match"
+    function gettingPassword(event) {
+        setpwData(event.target.value)
+    }
+    function getConfirmPassword(event) {
+        setConfPw(event.target.value)
+    }
+    function getEmail(event) {
+        setEmail(event.target.value)
     }
 
-    setErrors(errors)
-    return Object.keys(errors).length === 0
-  }
+    function sendRegister() {
+        let det = {"name": userName, "password": pW, "email": email}
+        axiosInstance.post("/users/add", det
+        ).then(
+            res => {
+                setRegisterError(false)
+                setRegisterSuccess(true)
+            }
+        ).catch((error) => {
+            setRegisterError(true)
+            setRegisterSuccess(false)
+            console.log(error.response.data["message"])
+            setAlertMsg(error.response.data["message"])
+        })
+    }
 
-  return (
-    <div className="App">
-      <h1>Registration Page</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="username"
-          placeholder="Username"
-          value={formData.username}
-          onChange={handleChange}
-        />
-        <div className="error">{errors.username}</div>
+    return (
+    <>
+    <NavBar/>
+    {(registerError==true) ?
+        <Alert key="danger" variant="danger">{alertMsg}</Alert>
+    : (registerSuccess==true ?
+        <Alert key="success" variant="success">{"Successfully Signed Up!"}</Alert> : null)
+    } 
+    <h1 className="d-flex flex-column align-items-center" style={{textAlign:"center", marginTop:"4rem"}}> Sign Up </h1>
+    <Form className="d-flex flex-column align-items-center" style={{textAlign:"center", marginTop:"2rem"}}>
+        <Form.Group className="mb-3" controlId="formBasicUsername">
+        <Form.Control type="username" onChange={gettingUserName} placeholder="Username"/>
+        </Form.Group>
 
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-        />
-        <div className="error">{errors.email}</div>
+        <Form.Group className="mb-3" controlId="formBasicEmail" style={{marginTop:"0.5rem"}}>
+        <Form.Control type="email" onChange={getEmail} placeholder="Email"/>
+        </Form.Group>
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-        />
-        <div className="error">{errors.password}</div>
+        <Form.Group className="mb-3" controlId="formBasicPassword" style={{marginTop:"0.5rem"}}>
+        <Form.Control name="p1" type="password" onChange={gettingPassword} placeholder="Password"/>
+        </Form.Group>
 
-        <input
-          type="password"
-          name="confirmPassword"
-          placeholder="Confirm Password"
-          value={formData.confirmPassword}
-          onChange={handleChange}
-        />
-        <div className="error">{errors.confirmPassword}</div>
+        <Form.Group className="mb-3" controlId="formBasicPassword" style={{marginTop:"0.5rem"}}>
+        <Form.Control name="p2" type="password" onChange={getConfirmPassword} placeholder="Confirm Password" />
+        </Form.Group>
 
-        <button type="submit">Register</button>
-      </form>
-    </div>
-  )
-  // return (
-  //   <div>Hello World</div>
-  // )
+        <Button variant="primary" onClick={()=>sendRegister()} style={{marginTop:"1.5rem"}}>
+        Submit
+        </Button>
+        <a href="/login" style={{marginTop:"2rem"}} >Already have an account? Sign in</a>
+    </Form>
+    </>
+)
 }
 
-
-
-export default Registration10
+export default Registration
