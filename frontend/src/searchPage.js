@@ -109,12 +109,10 @@ function SearchPage() {
       } else if(Object.keys(newCoinData).includes("name")){
         console.log(coin)
         return(
-            <div className="d-flex flex-row flex-wrap align-items-center justify-content-evenly">
-              <div className="d-flex align-items-center justify-content-center" style={{minWidth:"20vh", maxWidth:"30svh", marginLeft:"3vh",marginBottom:"1rem"}}>
+              <div className="d-flex flex-row align-items-center" style={{width:"20rem", height:"7rem", marginLeft:"3vh"}}>
                 <img className="bg-dark rounded-circle img-thumbnail" style={{width: "5rem", height: "5rem", marginBottom:"2vw"}} src={coin.logo}/>
                 <a className="coinListItem" href={"/Coin/"+coin.name}><h2>{coin.name}</h2></a>
               </div>
-            </div>
             )
       }
       else{
